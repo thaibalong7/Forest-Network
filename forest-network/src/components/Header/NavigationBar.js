@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../styles/Home.css';
 import '../../index.css';
-
+import { connect } from 'react-redux'
 class NavigationBar extends Component {
 	render() {
 		return (
@@ -19,7 +19,7 @@ class NavigationBar extends Component {
                             <input type="text" className="bg-grey-lighter h-8 px-4 py-2 text-xs w-48 rounded-full" placeholder="Search Twitter" />
                             <span className="flex items-center absolute pin-r pin-y mr-3"><i className="fa fa-search text-grey"></i></span>
                         </div>
-                        <div className="mr-4"><a href="#"><img src="https://lh3.googleusercontent.com/-2TFVM9adrO4/V_0GGJaxVtI/AAAAAAAACl0/ljqI4V2hMYwCqyxjEjsMcvmyvZinpfECQCEwYBhgL/w140-h139-p/28846486360_5541b15451_o.jpg" alt="avatar" className="h-8 w-8 rounded-full" /></a></div>
+                        <div className="mr-4"><a href="#"><img src={this.props.userProfileReducer.avatarUrl} alt="avatar" className="h-8 w-8 rounded-full" /></a></div>
                         <div><button className="bg-teal hover:bg-teal-dark text-white font-medium py-2 px-4 rounded-full">Log-out</button></div>
                     </div>
                 </div>
@@ -28,4 +28,7 @@ class NavigationBar extends Component {
 	}
 }
 
-export default NavigationBar;
+const mapStateToProps = (state) => ({
+    userProfileReducer: state.userProfileReducer
+})
+export default connect(mapStateToProps, null)(NavigationBar);
