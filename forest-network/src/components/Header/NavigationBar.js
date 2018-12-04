@@ -4,14 +4,29 @@ import '../../index.css';
 import { connect } from 'react-redux'
 class NavigationBar extends Component {
 	render() {
-		return (
+        var componentSelected = "text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal border-teal no-underline";
+        var componentUnselected = "text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal hover:border-teal hover:no-underline";
+        var homeStyles, notiStyles, meStyles;
+        if(this.props.flag ==="home"){
+            homeStyles = componentSelected;
+            notiStyles = meStyles = componentUnselected;
+        }
+        else if(this.props.flag ==="me"){
+            meStyles = componentSelected;
+            notiStyles = homeStyles = componentUnselected;
+        }
+        else{
+            notiStyles = componentSelected;
+            meStyles = homeStyles = componentUnselected;
+        }
+        return (
             <div className="bg-white">
                 <div className="container mx-auto flex flex-col lg:flex-row items-center py-2">
                     <nav className="w-full lg:w-2/5">
-                        <a href="#" className="text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal hover:border-teal hover:no-underline"><i className="fa fa-home fa-lg"></i>  Home</a>
+                        <a href="/home" className={homeStyles}><i className="fa fa-home fa-lg"></i>  Home</a>
                         {/* <a href="#" className="text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal hover:border-teal hover:no-underline"><i className="fa fa-bolt fa-lg"></i> Moments</a> */}
-                        <a href="#" className="text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal hover:border-teal hover:no-underline"><i className="fa fa-bell fa-lg"></i>  Notifications</a>
-                        <a href="#" className="text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal border-teal no-underline"><i className="fa fa-user fa-lg"></i>  Me   </a>
+                        <a href="/notifications" className={notiStyles}><i className="fa fa-bell fa-lg"></i>  Notifications</a>
+                        <a href="/me" className={meStyles}><i className="fa fa-user fa-lg"></i>  Me   </a>
                     </nav>
                     <div className="w-full lg:w-1/5 text-center my-4 lg:my-0"><a href="#"><i className="fa fa-twitter fa-lg text-blue"></i></a></div>
                     <div className="w-full lg:w-2/5 flex lg:justify-end">

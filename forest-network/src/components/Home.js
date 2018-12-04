@@ -11,8 +11,10 @@ class Home extends Component {
     render() {
         return (
             <div className="bg-grey-light font-sans">
+
                 {/* Begin header*/}
                 <NavigationBar/>
+
 
                 <User/>
                 <Me></Me>
