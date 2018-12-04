@@ -5,7 +5,7 @@ import { BrowserRouter as Link, withRouter } from "react-router-dom";
 import NavigationBar from './Header/NavigationBar';
 import User from './Header/User';
 
-class Home extends Component {
+class Notifications extends Component {
     render() {
         return (
             <div className="bg-grey-light font-sans">
@@ -373,4 +373,4 @@ class Home extends Component {
     }
 }
 
-export default (Home);
+export default (Notifications);
