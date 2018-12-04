@@ -3,9 +3,11 @@ import Home from './../components/Home'
 class HomeContainer extends Component {
 	render() {
 		return (
-			<Home>
-                
-            </Home>
+			<div>
+				<Home>
+
+				</Home>
+			</div>
 		);
 	}
 }
