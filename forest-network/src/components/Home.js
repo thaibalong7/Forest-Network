@@ -2,72 +2,20 @@ import React, { Component } from 'react';
 import '../styles/Home.css'
 import '../index.css'
 import { BrowserRouter as Link, withRouter } from "react-router-dom";
+import NavigationBar from './Header/NavigationBar';
+import User from './Header/User';
+
 class Home extends Component {
     render() {
         return (
             <div className="bg-grey-light font-sans">
-                <div className="bg-white">
-                    <div className="container mx-auto flex flex-col lg:flex-row items-center py-2">
-                        <nav className="w-full lg:w-2/5">
-                            <a href="#" className="text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal hover:border-teal hover:no-underline"><i className="fa fa-home fa-lg"></i>  Home</a>
-                            {/* <a href="#" className="text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal hover:border-teal hover:no-underline"><i className="fa fa-bolt fa-lg"></i> Moments</a> */}
-                            <a href="#" className="text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal hover:border-teal hover:no-underline"><i className="fa fa-bell fa-lg"></i>  Notifications</a>
-                            <a href="#" className="text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal border-teal no-underline"><i class="fa fa-user fa-lg"></i>  Me   </a>
-                        </nav>
-                        <div className="w-full lg:w-1/5 text-center my-4 lg:my-0"><a href="#"><i className="fa fa-twitter fa-lg text-blue"></i></a></div>
-                        <div className="w-full lg:w-2/5 flex lg:justify-end">
-                            <div className="mr-4 relative">
-                                <input type="text" className="bg-grey-lighter h-8 px-4 py-2 text-xs w-48 rounded-full" placeholder="Search Twitter" />
-                                <span className="flex items-center absolute pin-r pin-y mr-3"><i className="fa fa-search text-grey"></i></span>
-                            </div>
-                            <div className="mr-4"><a href="#"><img src="https://lh3.googleusercontent.com/-2TFVM9adrO4/V_0GGJaxVtI/AAAAAAAACl0/ljqI4V2hMYwCqyxjEjsMcvmyvZinpfECQCEwYBhgL/w140-h139-p/28846486360_5541b15451_o.jpg" alt="avatar" className="h-8 w-8 rounded-full" /></a></div>
-                            <div><button className="bg-teal hover:bg-teal-dark text-white font-medium py-2 px-4 rounded-full">Log-out</button></div>
-                        </div>
-                    </div>
-                    {/* <!-- end container --> */}
-                </div>
-
+                {/* Begin header*/}
+                <NavigationBar/>
                 <div className="hero h-64 bg-cover h-60"></div>
 
-                <div className="bg-white shadow">
-                    <div className="container mx-auto flex flex-col lg:flex-row items-center lg:relative">
-                        <div className="w-full lg:w-1/5">
-                            <img src="https://lh3.googleusercontent.com/-2TFVM9adrO4/V_0GGJaxVtI/AAAAAAAACl0/ljqI4V2hMYwCqyxjEjsMcvmyvZinpfECQCEwYBhgL/w140-h139-p/28846486360_5541b15451_o.jpg"
-                                alt="logo" className="rounded-full h-48 w-48 lg:absolute lg:pin-l lg:pin-t lg:-mt-24" />
-                        </div>
-                        <div className="w-full lg:w-1/1">
-                            <ul className="list-reset flex">
-                                <li className="text-center py-3 px-2 border-b-2 border-solid border-transparent">
-                                    <a href="#" className="text-grey-darker no-underline hover:no-underline">
-                                        <div className="text-sm font-bold tracking-tight mb-1">Tweets</div>
-                                        <div className="text-lg tracking-tight font-bold text-teal">60</div>
-                                    </a>
-                                </li>
-                                <li className="text-center py-3 px-2 border-b-2 border-solid border-transparent">
-                                    <a href="#" className="text-grey-darker no-underline hover:no-underline">
-                                        <div className="text-sm font-bold tracking-tight mb-1">Following</div>
-                                        <div className="text-lg tracking-tight font-bold text-teal">4</div>
-                                    </a>
-                                </li>
-                                <li className="text-center py-3 px-2 border-b-2 border-solid border-transparent">
-                                    <a href="#" className="text-grey-darker no-underline hover:no-underline">
-                                        <div className="text-sm font-bold tracking-tight mb-1">Followers</div>
-                                        <div className="text-lg tracking-tight font-bold text-teal">3,810</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        {/* <div className="w-full lg:w-1/4 flex my-4 lg:my-0 lg:justify-end items-center">
-                            <div className="mr-6">
-                                <button class="bg-teal hover:bg-teal-dark text-white font-medium py-2 px-4 rounded-full">Following</button>
-                            </div>
-                            <div>
-                                <a href="#" className="text-grey-dark"><i className="fa fa-ellipsis-v fa-lg"></i></a>
-                            </div>
-                        </div> */}
-                    </div>
-                    {/* <!-- end container --> */}
-                </div>
+                <User/>
+
+                {/* <!-- Begin Body --> */}
                 <div className="container mx-auto flex flex-col lg:flex-row mt-3 text-sm leading-normal">
                     <div className="w-full lg:w-1/4 pl-4 lg:pl-0 pr-6 mt-8 mb-4">
                         <h2><div className="text-black font-bold no-underline hover:underline">tblong</div></h2>
@@ -77,14 +25,13 @@ class Home extends Component {
                             A utility-first CSS framework for rapid UI development. By <a href="#" className="text-teal no-underline hover:underline">@adamwathan</a>, <a href="#" className="text-teal no-underline hover:underline">@reinink</a>, <a href="#" className="text-teal no-underline hover:underline">@davidhemphill</a>, and <a href="#" className="text-teal no-underline hover:underline">@steveschoger</a>.
                         </div> */}
                         <div className="mb-4">
-                            Team group of tblong, nhhung and llly
+                            Team group of tblong, nhhung and lhly
                         </div>
 
                         <div className="mb-2"><i className="fa fa-map-marker fa-lg text-grey-darker mr-1"></i><a href="#" className="text-teal no-underline hover:underline"> Ho Chi Minh City</a></div>
                         <div className="mb-2"><i className="fa fa-at fa-lg text-grey-darker mr-1"></i><a href="#" className="text-teal no-underline hover:underline">thaibalong7@gmail.com</a></div>
                         <div className="mb-4"><i className="fa fa-clock-o fa-lg text-grey-darker mr-1"></i><a href="#" className="text-teal no-underline hover:underline">4th Dec, 2018</a></div>
                       
-
                         {/* <div className="mb-4">
                             <button className="bg-teal hover:bg-teal-dark text-white font-medium py-2 px-4 rounded-full w-full h-10">Tweet to Tailwind CSS</button>
                         </div> */}
@@ -115,9 +62,7 @@ class Home extends Component {
                         </div>
                     </div>
 
-
                     <div className="w-full lg:w-1/2 bg-white mb-4">
-
                         <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
                             <a href="#" className="text-black mr-6 no-underline hover-underline">Tweets</a>
                         </div>
@@ -160,7 +105,6 @@ class Home extends Component {
                         </div>
 
                         <div className="flex border-b border-solid border-grey-light">
-
                             <div className="w-1/8 text-right pl-3 pt-3">
                                 <div><i className="fa fa-retweet text-grey-dark mr-2"></i></div>
                                 <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_adam.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
@@ -199,7 +143,6 @@ class Home extends Component {
                         </div>
 
                         <div className="flex border-b border-solid border-grey-light">
-
                             <div className="w-1/8 text-right pl-3 pt-3">
                                 <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_tailwind.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
                             </div>
@@ -235,7 +178,6 @@ class Home extends Component {
                         </div>
 
                         <div className="flex border-b border-solid border-grey-light">
-
                             <div className="w-1/8 text-right pl-3 pt-3">
                                 <div><i className="fa fa-retweet text-grey-dark mr-2"></i></div>
                                 <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_egghead.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
@@ -425,9 +367,7 @@ class Home extends Component {
                             <span className="mr-2"><a href="#" className="text-grey-darker">Ads info</a></span>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         );
     }
