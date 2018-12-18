@@ -1,6 +1,7 @@
 import {
     CHANGE_USER_INFO,
-    LOAD_TWEETS
+    LOAD_TWEETS,
+    CHANGE_FLAG
 } from './types'
 
 export const change_user_info = (user_info) => {
@@ -13,5 +14,12 @@ export const change_user_info = (user_info) => {
 export const load_tweets = () => {
     return {
         type: LOAD_TWEETS,
+    }
+}
+
+export const change_flag = (flag) => {
+    return {
+        type: CHANGE_FLAG,
+        flag
     }
 }

@@ -3,8 +3,9 @@ import '../styles/Home.css'
 import '../index.css'
 import { BrowserRouter as Link, withRouter } from "react-router-dom";
 
-class Notifications extends Component {
+class Follower extends Component {
     render() {
+        console.log("Followerrrrrrr");
         return (
                 <div className="container mx-auto flex flex-col lg:flex-row mt-3 text-sm leading-normal">
                     <div className="w-full lg:w-1/4 pl-4 lg:pl-0 pr-6 mt-8 mb-4">
@@ -362,4 +363,4 @@ class Notifications extends Component {
     }
 }
 
-export default (Notifications);
+export default withRouter(Follower);

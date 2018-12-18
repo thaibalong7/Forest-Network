@@ -2,20 +2,11 @@ import React, { Component } from 'react';
 import '../styles/Home.css'
 import '../index.css'
 import { BrowserRouter as Link, withRouter } from "react-router-dom";
-import NavigationBar from './Header/NavigationBar';
-import User from './Header/User';
 
-class Me extends Component {
+class Tweet extends Component {
     render() {
+        console.log("Tweetttttttt");
         return (
-            <div className="bg-grey-light font-sans">
-
-                {/* Begin header*/}
-                <NavigationBar flag={this.props.flag}/>
-                <div className="hero h-64 bg-cover h-60"></div>
-                <User/>
-
-                {/* <!-- Begin Body --> */}
                 <div className="container mx-auto flex flex-col lg:flex-row mt-3 text-sm leading-normal">
                     <div className="w-full lg:w-1/4 pl-4 lg:pl-0 pr-6 mt-8 mb-4">
                         <h2><div className="text-black font-bold no-underline hover:underline">tblong</div></h2>
@@ -368,9 +359,8 @@ class Me extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
         );
     }
 }
 
-export default (Me);
+export default withRouter(Tweet);

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Me from './../components/Me'
+import MeComponent from './../components/MeComponent'
 
 class MeContainer extends Component {
 	render() {
 		return (
 			<div>
-				<Me flag="me">
-				</Me>
+				<MeComponent flag="me">
+				</MeComponent>
 			</div>
 		);
 	}
