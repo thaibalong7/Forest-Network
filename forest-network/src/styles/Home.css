@@ -34,3 +34,66 @@ a:hover {
 .w-7\/8 {
     width: 87.5%;
 }
+.rcorners1 {
+    border-radius: 50px / 15px;
+    background: rgb(153, 210, 224);
+    padding: 20px; 
+    width: 200px;
+    height: 20px; 
+  }
+  
+  .rcorners2 {
+    border-radius: 15px / 50px;
+    background: #73AD21;
+    padding: 20px; 
+    width: 200px;
+    height: 150px; 
+  }
+  
+  .rcorners3 {
+    border-radius: 50%;
+    background: #73AD21;
+    padding: 20px; 
+    width: 200px;
+    height: 150px;
+  } 
+
+  .rcorners4 {
+    border-radius: 15px 50px 30px;
+    background: #73AD21;
+    padding: 20px; 
+    width: 200px;
+    height: 150px; 
+  }
+  
+  .rcorners5 {
+    border-radius: 15px 50px;
+    background: #73AD21;
+    padding: 20px; 
+    width: 100px;
+    height: 50px; 
+  } 
+  .rcorners11 {
+    border-radius: 25px;
+    background: rgb(208, 235, 231);
+    padding: 20px; 
+    width: 300px;
+    height: 50px;
+    box-shadow: 10px 10px;  
+  }
+
+  .rcorners11_noshadow
+  {
+    border-radius: 25px;
+    background: rgb(136, 223, 211);
+    padding: 10px;
+    width: 100px;
+    height: 50px;
+  }
+
+  .center-me {
+   padding-top: 200px;
+   padding-bottom: 200px;
+   text-align: center;
+   background-color: aquamarine;
+  }

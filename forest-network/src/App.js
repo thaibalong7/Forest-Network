@@ -10,14 +10,17 @@ import NavigationBar from './components/Header/NavigationBar';
 import {connect} from "react-redux";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import LoginContainer from './containers/LoginContainer';
+import Login from './components/Login';
 class App extends Component {
 	render() {
 		return (
 			<Router>
 				<div className="bg-grey-light font-sans">
-					<NavigationBar flag={this.props.flag}/>
+					
+						<NavigationBar flag={this.props.flag}/>
 					<Switch>
-						<Route exact path="/" component={HomeContainer} />
+						<Route exact path="/" component={LoginContainer} />
 						<Route path="/home" component={HomeContainer} />
 						<Route path="/me" component={MeContainer} />
 						<Route path="/notifications" component={NotificationContainer} />
