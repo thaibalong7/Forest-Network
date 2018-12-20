@@ -1,0 +1,44 @@
+.follower-main{
+    width: 95%;
+}
+
+.following-main{
+    width: 95%;
+}
+
+
+.btn-follower{
+	border: 1px solid #7f838b;
+	background: #3897f0;
+	border: 1px solid #3897f0;
+	color: white;
+	width: 50px;
+	height: 20px;
+}
+
+.btn-following{
+	border: 1px solid #7f838b;
+	background: #3897f0;
+	border: 1px solid #3897f0;
+	color: white;
+	width: 50px;
+	height: 20px;
+}
+
+.btn-following:active{
+	border: 1px solid #7f838b;
+	background: white;
+	border: 1px solid #3897f0;
+	color: black;
+	width: 50px;
+	height: 20px;
+}
+
+.btn-follower:active{
+	border: 1px solid #7f838b;
+	background: white;
+	border: 1px solid #3897f0;
+	color: black;
+	width: 50px;
+	height: 20px;
+}

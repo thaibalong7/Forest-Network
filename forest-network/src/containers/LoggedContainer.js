@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class LoggedContainer extends Component {
     log_out = () => {
-        console.log('log-out')
+        console.log('log-out');
         localStorage.setItem("flagReducer", JSON.stringify("home"));
         let { history } = this.props;
         history.push('/');

@@ -5,7 +5,7 @@ class FollowerContainer extends Component {
 	render() {
 		return (
 			<div>
-				<Follower flag="me">
+				<Follower>
 				</Follower>
 			</div>
 		);

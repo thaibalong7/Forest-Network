@@ -5,7 +5,7 @@ class MeContainer extends Component {
 	render() {
 		return (
 			<div>
-				<MeComponent flag="me">
+				<MeComponent>
 				</MeComponent>
 			</div>
 		);

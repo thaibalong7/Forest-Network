@@ -50,7 +50,7 @@ class Follower extends Component {
                     </div> */}
 
                 {/* Middle */}
-                <div className="w-full lg:w-1/2 bg-white mb-4">
+                <div className="follower-main w-full lg:w-1/2 bg-white mb-4">
                     {/* Title */}
                     <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
                         <a href="#" className="text-black mr-6 no-underline hover-underline">Follower</a>
@@ -68,7 +68,7 @@ class Follower extends Component {
                                     <span className="font-bold"><a href="#" className="text-black">Tailwind CSS</a></span>
                                 </div>
                                 <div>
-                                    <button class="btn-following">Follower</button>
+                                    <button class="btn-follower">Follower</button>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@ class Follower extends Component {
                                     <span className="font-bold"><a href="#" className="text-black">Tailwind CSS</a></span>
                                 </div>
                                 <div>
-                                    <button class="btn-following">Follower</button>
+                                    <button class="btn-follower">Follower</button>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +102,7 @@ class Follower extends Component {
                                     <span className="font-bold"><a href="#" className="text-black">Tailwind CSS</a></span>
                                 </div>
                                 <div>
-                                    <button className="btn-following">Follower</button>
+                                    <button className="btn-follower">Follower</button>
                                 </div>
                             </div>
                         </div>

@@ -49,7 +49,7 @@ class Following extends Component {
                     </div> */}
 
                 {/* Middle */}
-                <div className="w-full lg:w-1/2 bg-white mb-4">
+                <div className="following-main w-full lg:w-1/2 bg-white mb-4">
                     {/* Title */}
                     <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
                         <a href="#" className="text-black mr-6 no-underline hover-underline">Following</a>
