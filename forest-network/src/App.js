@@ -17,7 +17,7 @@ class App extends Component {
 		return (
 			<Router>
 				<div className="bg-grey-light font-sans">
-						<NavigationBar flag={this.props.flag}/>
+				<NavigationBar flag={this.props.flag}/>
 					<Switch>
 						<Route exact path="/" component={LoginContainer} />
 						<Route path="/home" component={HomeContainer} />
