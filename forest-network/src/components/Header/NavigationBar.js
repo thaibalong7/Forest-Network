@@ -45,9 +45,7 @@ class NavigationBar extends Component {
         }
         
         return (
-            
             <div className="bg-white">
-                {console.log("asdasjdshaud")}
                 <div className="container mx-auto flex flex-col lg:flex-row items-center py-2">
                     <nav className="w-full lg:w-2/5">
                         <Link to="/home" onClick={() => this.onChangeFlagPage("home")} className={homeStyles}><i className="fa fa-home fa-lg"></i>  Home</Link>
@@ -77,22 +75,22 @@ class NavigationBar extends Component {
                                 <div className="w-full lg:w-1/1">
                                     <ul className="list-reset flex">
                                         <li className="text-center py-3 px-2 border-b-2 border-solid border-transparent">
-                                            <span onClick={() => this.onChangeFlagMe("tweet")} className="text-grey-darker no-underline hover:no-underline">
+                                            <button onClick={() => this.onChangeFlagMe("me")} className="text-grey-darker no-underline hover:no-underline">
                                                 <div className="text-sm font-bold tracking-tight mb-1">Tweets</div>
                                                 <div className="text-lg tracking-tight font-bold text-teal">{this.props.userProfileReducer.tweets}</div>
-                                            </span>
+                                            </button>
                                         </li>
                                         <li className="text-center py-3 px-2 border-b-2 border-solid border-transparent">
-                                            <span onClick={() => this.onChangeFlagMe("following")} className="text-grey-darker no-underline hover:no-underline">
+                                            <button onClick={() => this.onChangeFlagMe("following")} className="text-grey-darker no-underline hover:no-underline">
                                                 <div className="text-sm font-bold tracking-tight mb-1">Following</div>
                                                 <div className="text-lg tracking-tight font-bold text-teal">{this.props.userProfileReducer.following}</div>
-                                            </span>
+                                            </button>
                                         </li>
                                         <li className="text-center py-3 px-2 border-b-2 border-solid border-transparent">
-                                            <span onClick={() => this.onChangeFlagMe("follower")} className="text-grey-darker no-underline hover:no-underline">
+                                            <button onClick={() => this.onChangeFlagMe("follower")} className="text-grey-darker no-underline hover:no-underline">
                                                 <div className="text-sm font-bold tracking-tight mb-1">Followers</div>
                                                 <div className="text-lg tracking-tight font-bold text-teal">{this.props.userProfileReducer.follower}</div>
-                                            </span>
+                                            </button>
                                         </li>
                                     </ul>
                                 </div>

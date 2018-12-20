@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../styles/Home.css';
 import '../index.css';
 import { connect } from 'react-redux';
+import FollowingContainer from '../containers/FollowingContainer';
+import FollowerContainer from '../containers/FollowerContainer';
 
 function renderTweets(props) {
     //dựa vào danh sách tweets có trong props để render
@@ -165,6 +167,8 @@ function renderTweets(props) {
 
 class MeComponent extends Component {
     render() {
+        console.log("aaaaaaaaaaaaaaaaaa");
+        console.log(this.props.flagMe);
         return (
             <div className="container mx-auto flex flex-col lg:flex-row mt-3 text-sm leading-normal">
                 {/* Left side */}
@@ -211,7 +215,18 @@ class MeComponent extends Component {
                     <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
                         <a href="#" className="text-black mr-6 no-underline hover-underline">Tweets</a>
                     </div>
-                    {renderTweets(this.props)}
+                    {
+                        this.props.flagMe === "me"?
+                        renderTweets(this.props):null
+                    }
+                    {
+                        this.props.flagMe === "following"?
+                        <FollowingContainer/>:null
+                    }
+                    {
+                        this.props.flagMe === "follower"?
+                        <FollowerContainer/>:null
+                    }
 
                 </div>
                 {/* End middle */}
@@ -371,7 +386,7 @@ class MeComponent extends Component {
 const mapStateToProps = (state) => ({
     userProfileReducer: state.userProfileReducer,
     tweetsUserReducer: state.tweetsUserReducer,
-    flagMeReducer: state.flagMeReducer
+    flagMe: state.flagMeReducer
 })
 
 
