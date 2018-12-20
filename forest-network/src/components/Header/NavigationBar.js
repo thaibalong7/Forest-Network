@@ -2,38 +2,38 @@ import React, { Component } from 'react';
 import '../../styles/Home.css';
 import '../../index.css';
 import { connect } from 'react-redux';
-import { BrowserRouter as Link, withRouter } from "react-router-dom";
-import {change_flag_page, change_flag_me} from "../../actions/index";
+import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
+import { change_flag_page, change_flag_me } from "../../actions/index";
 
-class NavigationBar extends Component {   
-    
-    onChangeFlagPage(event){
+class NavigationBar extends Component {
+
+    onChangeFlagPage(event) {
         console.log(event);
-        if(event === "me"){
+        if (event === "me") {
             this.props.change_flag_page(event);
             this.props.change_flag_me(event);
         }
-        else{
-            this.props.change_flag_page(event);           
+        else {
+            this.props.change_flag_page(event);
         }
     }
 
-    onChangeFlagMe(event){
+    onChangeFlagMe(event) {
         this.props.change_flag_me(event);
     }
-    
+
     render() {
         var componentSelected = "text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal border-teal no-underline";
         var componentUnselected = "text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal hover:border-teal hover:no-underline";
         var homeStyles, notiStyles, meStyles;
         // console.log("----------------");
         // console.log(this.props.flag);
-        if(this.props.flagPage ==="home"){
+        if (this.props.flagPage === "home") {
             console.log("Here home");
             homeStyles = componentSelected;
             notiStyles = meStyles = componentUnselected;
         }
-        else if(this.props.flagPage === "me"){
+        else if (this.props.flagPage === "me") {
             console.log("Here me");
             meStyles = componentSelected;
             notiStyles = homeStyles = componentUnselected;
@@ -50,8 +50,8 @@ class NavigationBar extends Component {
                     <nav className="w-full lg:w-2/5">
                         <Link to="/home" onClick={() => this.onChangeFlagPage("home")} className={homeStyles}><i className="fa fa-home fa-lg"></i>  Home</Link>
                         {/* <a href="#" className="text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal hover:border-teal hover:no-underline"><i className="fa fa-bolt fa-lg"></i> Moments</a> */}
-                        <Link to="/notifications" onClick={() => this.onChangeFlagPage("noti")} className={notiStyles}><i className="fa fa-bell fa-lg"></i>  Notifications</Link>
-                        <Link to="/me" onClick={() => this.onChangeFlagPage("me")} className={meStyles}><i className="fa fa-user fa-lg"></i>  Me   </Link>
+                        <Link to="/home/notifications" onClick={() => this.onChangeFlagPage("noti")} className={notiStyles}><i className="fa fa-bell fa-lg"></i>  Notifications</Link>
+                        <Link to="/home/me" onClick={() => this.onChangeFlagPage("me")} className={meStyles}><i className="fa fa-user fa-lg"></i>  Me   </Link>
                     </nav>
                     <div className="w-full lg:w-1/5 text-center my-4 lg:my-0"><a href="#"><i className="fa fa-twitter fa-lg text-blue"></i></a></div>
                     <div className="w-full lg:w-2/5 flex lg:justify-end">
@@ -60,7 +60,7 @@ class NavigationBar extends Component {
                             <span className="flex items-center absolute pin-r pin-y mr-3"><i className="fa fa-search text-grey"></i></span>
                         </div>
                         <div className="mr-4"><a href="#"><img src={this.props.userProfileReducer.avatarUrl} alt="avatar" className="h-8 w-8 rounded-full" /></a></div>
-                        <div><button className="bg-teal hover:bg-teal-dark text-white font-medium py-2 px-4 rounded-full">Log-out</button></div>
+                        <div><button className="bg-teal hover:bg-teal-dark text-white font-medium py-2 px-4 rounded-full" onClick={this.props.log_out}>Log-out</button></div>
                     </div>
                 </div>
                 <div className="hero h-64 bg-cover h-60"></div>
@@ -72,29 +72,29 @@ class NavigationBar extends Component {
                         </div>
                         {
                             this.props.flagPage === "me" ?
-                            <div className="w-full lg:w-1/1">
-                                <ul className="list-reset flex">
-                                    <li className="text-center py-3 px-2 border-b-2 border-solid border-transparent">
-                                        <span onClick={() => this.onChangeFlagMe("tweet")} className="text-grey-darker no-underline hover:no-underline">
-                                            <div className="text-sm font-bold tracking-tight mb-1">Tweets</div>
-                                            <div className="text-lg tracking-tight font-bold text-teal">{this.props.userProfileReducer.tweets}</div>
-                                        </span>
-                                    </li>
-                                    <li className="text-center py-3 px-2 border-b-2 border-solid border-transparent">
-                                        <span onClick={() => this.onChangeFlagMe("following")} className="text-grey-darker no-underline hover:no-underline">
-                                            <div className="text-sm font-bold tracking-tight mb-1">Following</div>
-                                            <div className="text-lg tracking-tight font-bold text-teal">{this.props.userProfileReducer.following}</div>
-                                        </span>
-                                    </li>
-                                    <li className="text-center py-3 px-2 border-b-2 border-solid border-transparent">
-                                        <span onClick={() => this.onChangeFlagMe("follower")} className="text-grey-darker no-underline hover:no-underline">
-                                            <div className="text-sm font-bold tracking-tight mb-1">Followers</div>
-                                            <div className="text-lg tracking-tight font-bold text-teal">{this.props.userProfileReducer.follower}</div>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                            : null
+                                <div className="w-full lg:w-1/1">
+                                    <ul className="list-reset flex">
+                                        <li className="text-center py-3 px-2 border-b-2 border-solid border-transparent">
+                                            <span onClick={() => this.onChangeFlagMe("tweet")} className="text-grey-darker no-underline hover:no-underline">
+                                                <div className="text-sm font-bold tracking-tight mb-1">Tweets</div>
+                                                <div className="text-lg tracking-tight font-bold text-teal">{this.props.userProfileReducer.tweets}</div>
+                                            </span>
+                                        </li>
+                                        <li className="text-center py-3 px-2 border-b-2 border-solid border-transparent">
+                                            <span onClick={() => this.onChangeFlagMe("following")} className="text-grey-darker no-underline hover:no-underline">
+                                                <div className="text-sm font-bold tracking-tight mb-1">Following</div>
+                                                <div className="text-lg tracking-tight font-bold text-teal">{this.props.userProfileReducer.following}</div>
+                                            </span>
+                                        </li>
+                                        <li className="text-center py-3 px-2 border-b-2 border-solid border-transparent">
+                                            <span onClick={() => this.onChangeFlagMe("follower")} className="text-grey-darker no-underline hover:no-underline">
+                                                <div className="text-sm font-bold tracking-tight mb-1">Followers</div>
+                                                <div className="text-lg tracking-tight font-bold text-teal">{this.props.userProfileReducer.follower}</div>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                : null
                         }
                         {/* <div className="w-full lg:w-1/4 flex my-4 lg:my-0 lg:justify-end items-center">
                         <div className="mr-6">
@@ -108,7 +108,7 @@ class NavigationBar extends Component {
                     {/* <!-- End Header --> */}
                 </div>
             </div>
-		);
+        );
     };
 }
 
@@ -117,13 +117,13 @@ const mapStateToProps = (state) => ({
     flagPage: state.flagPageReducer
 })
 
-const mapDispatchToProps = (dispatch, props) =>{
-    return{
-        change_flag_page: (event) =>{
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        change_flag_page: (event) => {
             dispatch(change_flag_page(event));
         },
-        change_flag_me: (event) =>{
-            dispatch(change_flag_me(event));    
+        change_flag_me: (event) => {
+            dispatch(change_flag_me(event));
         }
     }
 }

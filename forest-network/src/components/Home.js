@@ -21,7 +21,7 @@ class Home extends Component {
                     <div className="mb-2"><i className="fa fa-map-marker fa-lg text-grey-darker mr-1"></i><a href="#" className="text-teal no-underline hover:underline"> Ho Chi Minh City</a></div>
                     <div className="mb-2"><i className="fa fa-at fa-lg text-grey-darker mr-1"></i><a href="#" className="text-teal no-underline hover:underline">thaibalong7@gmail.com</a></div>
                     <div className="mb-4"><i className="fa fa-clock-o fa-lg text-grey-darker mr-1"></i><a href="#" className="text-teal no-underline hover:underline">4th Dec, 2018</a></div>
-                  
+
                     {/* <div className="mb-4">
                         <button className="bg-teal hover:bg-teal-dark text-white font-medium py-2 px-4 rounded-full w-full h-10">Tweet to Tailwind CSS</button>
                     </div> */}
