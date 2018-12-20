@@ -43,9 +43,11 @@ class NavigationBar extends Component {
             notiStyles = componentSelected;
             meStyles = homeStyles = componentUnselected;
         }
-        console.log("asdasjdshaud");
+        
         return (
+            
             <div className="bg-white">
+                {console.log("asdasjdshaud")}
                 <div className="container mx-auto flex flex-col lg:flex-row items-center py-2">
                     <nav className="w-full lg:w-2/5">
                         <Link to="/home" onClick={() => this.onChangeFlagPage("home")} className={homeStyles}><i className="fa fa-home fa-lg"></i>  Home</Link>
