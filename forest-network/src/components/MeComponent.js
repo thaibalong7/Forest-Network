@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../styles/Home.css';
 import '../index.css';
 import { connect } from 'react-redux';
-import NavigationBar from './Header/NavigationBar';
 
 function renderTweets(props) {
     //dựa vào danh sách tweets có trong props để render
@@ -164,29 +163,22 @@ function renderTweets(props) {
     </div>)
 }
 
-
 class MeComponent extends Component {
     render() {
         return (
                 <div className="container mx-auto flex flex-col lg:flex-row mt-3 text-sm leading-normal">
+                    {/* Left side */}
                     <div className="w-full lg:w-1/4 pl-4 lg:pl-0 pr-6 mt-8 mb-4">
                         <h2><div className="text-black font-bold no-underline hover:underline">{this.props.userProfileReducer.name}</div></h2>
                         <div className="mb-4"><a href="#" className="text-grey-darker no-underline hover:underline">@{this.props.userProfileReducer.name}</a></div>
 
-                        {/* <div className="mb-4">
-                    A utility-first CSS framework for rapid UI development. By <a href="#" className="text-teal no-underline hover:underline">@adamwathan</a>, <a href="#" className="text-teal no-underline hover:underline">@reinink</a>, <a href="#" className="text-teal no-underline hover:underline">@davidhemphill</a>, and <a href="#" className="text-teal no-underline hover:underline">@steveschoger</a>.
-                </div> */}
                         <div className="mb-4">
                             Team group of tblong, nhhung and lhly
-                </div>
+                        </div>
 
                         <div className="mb-2"><i className="fa fa-map-marker fa-lg text-grey-darker mr-1"></i><a href="#" className="text-teal no-underline hover:underline"> Ho Chi Minh City</a></div>
                         <div className="mb-2"><i className="fa fa-at fa-lg text-grey-darker mr-1"></i><a href="#" className="text-teal no-underline hover:underline">{this.props.userProfileReducer.email}</a></div>
                         <div className="mb-4"><i className="fa fa-clock-o fa-lg text-grey-darker mr-1"></i><a href="#" className="text-teal no-underline hover:underline">4th Dec, 2018</a></div>
-
-                        {/* <div className="mb-4">
-                    <button className="bg-teal hover:bg-teal-dark text-white font-medium py-2 px-4 rounded-full w-full h-10">Tweet to Tailwind CSS</button>
-                </div> */}
 
                         <div className="mb-4"><i className="fa fa-user fa-lg text-grey-dark mr-1"></i><a href="#" className="text-teal no-underline hover:underline">27 Followers you know</a></div>
 
@@ -212,8 +204,9 @@ class MeComponent extends Component {
                             <a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_photo4.jpg" alt="photo" className="h-20 w-20 mr-1 mb-1" /></a>
                             <a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_photo5.jpg" alt="photo" className="h-20 w-20 mr-1 mb-1" /></a>
                         </div>
-                    </div>
+                    </div> {/* End eft side */}
 
+                    {/* Middle */}
                     <div className="w-full lg:w-1/2 bg-white mb-4">
                         <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
                             <a href="#" className="text-black mr-6 no-underline hover-underline">Tweets</a>
@@ -221,7 +214,9 @@ class MeComponent extends Component {
                         {renderTweets(this.props)}
 
                     </div>
+                    {/* End middle */}
 
+                    {/* Right side */}
                     <div className="w-full lg:w-1/4 pl-4">
                         <div className="bg-white p-3 mb-3">
                             <div>
@@ -367,6 +362,7 @@ class MeComponent extends Component {
                             <span className="mr-2"><a href="#" className="text-grey-darker">Ads info</a></span>
                         </div>
                     </div>
+                    {/* End right side */}
                 </div>
         );
     }
@@ -374,7 +370,8 @@ class MeComponent extends Component {
 
 const mapStateToProps = (state) => ({
     userProfileReducer: state.userProfileReducer,
-    tweetsUserReducer: state.tweetsUserReducer
+    tweetsUserReducer: state.tweetsUserReducer,
+    flagMeReducer: state.flagMeReducer
 })
 
 

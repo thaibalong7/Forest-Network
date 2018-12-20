@@ -1,5 +1,5 @@
 import {
-    CHANGE_FLAG,
+    CHANGE_FLAG_PAGE,
 } from '../actions/types';
 
 
@@ -7,9 +7,10 @@ var flagDefault = JSON.parse(localStorage.getItem('flagReducer'));
 
 const initialState = flagDefault ? flagDefault : "home";
 
-const flag = (prevState = initialState, action) => {
+const flagPage = (prevState = initialState, action) => {
+    console.log("Inside reducer Flag Page Ruducer");
     switch (action.type) {
-        case CHANGE_FLAG: {
+        case CHANGE_FLAG_PAGE: {
             prevState = action.flag;
             localStorage.setItem("flagReducer", JSON.stringify(prevState));
             return prevState;
@@ -17,8 +18,7 @@ const flag = (prevState = initialState, action) => {
         default:
             return prevState;
     }
-
 }
 
-export default flag;
+export default flagPage;
 

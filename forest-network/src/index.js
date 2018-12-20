@@ -6,7 +6,6 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { configureStore } from './store';
 import { Provider } from 'react-redux';
-import Login from './components/Login';
 const store = configureStore();
 
 ReactDOM.render(

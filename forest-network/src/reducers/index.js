@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import userProfileReducer from './UserProfileReducer';
 import tweetsUserReducer from './TweetsUserReducer';
-import flagReducer from './flagReducer';
+import flagPageReducer from './flagReducer';
+import flagMeReducer from './flagMeReducer';
 
 export default combineReducers({
     userProfileReducer: userProfileReducer,
     tweetsUserReducer: tweetsUserReducer,
-    flagReducer: flagReducer
+    flagPageReducer: flagPageReducer,
+    flagMeReducer: flagMeReducer
 });

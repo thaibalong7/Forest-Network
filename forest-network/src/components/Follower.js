@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import '../styles/Home.css'
-import '../index.css'
+import '../styles/Home.css';
+import '../index.css';
+import "../styles/Follow.css";
+
 import { BrowserRouter as Link, withRouter } from "react-router-dom";
 
 class Follower extends Component {
