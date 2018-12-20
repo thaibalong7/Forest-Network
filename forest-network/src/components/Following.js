@@ -8,8 +8,8 @@ class Following extends Component {
     render() {
         console.log("Followingggggggg");
         return (
-                <div className="container mx-auto flex flex-col lg:flex-row mt-3 text-sm leading-normal">
-                    {/* <div className="w-full lg:w-1/4 pl-4 lg:pl-0 pr-6 mt-8 mb-4">
+            <div className="container mx-auto flex flex-col lg:flex-row mt-3 text-sm leading-normal">
+                {/* <div className="w-full lg:w-1/4 pl-4 lg:pl-0 pr-6 mt-8 mb-4">
                         <h2><div className="text-black font-bold no-underline hover:underline">tblong</div></h2>
                         <div className="mb-4"><a href="#" className="text-grey-darker no-underline hover:underline">@tblong</a></div>
 
@@ -48,67 +48,67 @@ class Following extends Component {
                         </div>
                     </div> */}
 
-                    {/* Middle */}
-                    <div className="w-full lg:w-1/2 bg-white mb-4">
-                        {/* Title */}
-                        <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
-                            <a href="#" className="text-black mr-6 no-underline hover-underline">Following</a>
+                {/* Middle */}
+                <div className="w-full lg:w-1/2 bg-white mb-4">
+                    {/* Title */}
+                    <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
+                        <a href="#" className="text-black mr-6 no-underline hover-underline">Following</a>
+                    </div>
+
+                    {/* User */}
+                    <div className="flex border-b border-solid border-grey-light">
+                        <div className="w-1/8 text-right pl-3 pt-3">
+                            <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_tailwind.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
                         </div>
 
-                        {/* User */}
-                        <div className="flex border-b border-solid border-grey-light">
-                            <div className="w-1/8 text-right pl-3 pt-3">
-                                <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_tailwind.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
-                            </div>
-
-                            <div className="w-7/8 p-3 pl-0">
-                                <div className="flex justify-between">
-                                    <div>
-                                        <span className="font-bold"><a href="#" className="text-black">Tailwind CSS</a></span>
-                                    </div>
-                                    <div>
-                                        <button class="btn-following">Following</button>
-                                    </div>
+                        <div className="w-7/8 p-3 pl-0">
+                            <div className="flex justify-between">
+                                <div>
+                                    <span className="font-bold"><a href="#" className="text-black">Tailwind CSS</a></span>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div className="flex border-b border-solid border-grey-light">
-                            <div className="w-1/8 text-right pl-3 pt-3">
-                            <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_adam.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
-                            </div>
-
-                            <div className="w-7/8 p-3 pl-0">
-                                <div className="flex justify-between">
-                                    <div>
-                                        <span className="font-bold"><a href="#" className="text-black">Tailwind CSS</a></span>
-                                    </div>
-                                    <div>
-                                        <button class="btn-following">Following</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="flex border-b border-solid border-grey-light">
-                            <div className="w-1/8 text-right pl-3 pt-3">
-                            <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_egghead.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
-                            </div>
-
-                            <div className="w-7/8 p-3 pl-0">
-                                <div className="flex justify-between">
-                                    <div>
-                                        <span className="font-bold"><a href="#" className="text-black">Tailwind CSS</a></span>
-                                    </div>
-                                    <div>
-                                        <button className="btn-following">Following</button>
-                                    </div>
+                                <div>
+                                    <button class="btn-following">Following</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* <div className="w-full lg:w-1/4 pl-4">
+                    <div className="flex border-b border-solid border-grey-light">
+                        <div className="w-1/8 text-right pl-3 pt-3">
+                            <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_adam.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
+                        </div>
+
+                        <div className="w-7/8 p-3 pl-0">
+                            <div className="flex justify-between">
+                                <div>
+                                    <span className="font-bold"><a href="#" className="text-black">Tailwind CSS</a></span>
+                                </div>
+                                <div>
+                                    <button class="btn-following">Following</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex border-b border-solid border-grey-light">
+                        <div className="w-1/8 text-right pl-3 pt-3">
+                            <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_egghead.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
+                        </div>
+
+                        <div className="w-7/8 p-3 pl-0">
+                            <div className="flex justify-between">
+                                <div>
+                                    <span className="font-bold"><a href="#" className="text-black">Tailwind CSS</a></span>
+                                </div>
+                                <div>
+                                    <button className="btn-following">Following</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* <div className="w-full lg:w-1/4 pl-4">
                         <div className="bg-white p-3 mb-3">
                             <div>
                                 <span className="text-lg font-bold">Who to follow</span>
@@ -253,7 +253,7 @@ class Following extends Component {
                             <span className="mr-2"><a href="#" className="text-grey-darker">Ads info</a></span>
                         </div>
                     </div> */}
-                </div>
+            </div>
         );
     }
 }
