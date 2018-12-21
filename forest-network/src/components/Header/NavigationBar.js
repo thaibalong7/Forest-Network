@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-d
 import { change_flag_page, change_flag_me } from "../../actions/index";
 
 class NavigationBar extends Component {
-
     onChangeFlagPage(event) {
         console.log(event);
         if (event === "me") {
@@ -26,8 +25,8 @@ class NavigationBar extends Component {
         var componentSelected = "text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal border-teal no-underline";
         var componentUnselected = "text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal hover:border-teal hover:no-underline";
         var homeStyles, notiStyles, meStyles;
-        // console.log("----------------");
-        // console.log(this.props.flag);
+        console.log("----------------");
+        console.log(this.props.flagPage);
         if (this.props.flagPage === "home") {
             console.log("Here home");
             homeStyles = componentSelected;

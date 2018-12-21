@@ -34,7 +34,7 @@ class Login extends Component {
                                 <Link to="/home">
                                     <button className="login100-form-btn">
                                         Login
-                                </button>
+                                    </button>
                                 </Link>
                             </div>
                         </form>

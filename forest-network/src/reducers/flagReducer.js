@@ -8,7 +8,6 @@ var flagDefault = JSON.parse(localStorage.getItem('flagReducer'));
 const initialState = flagDefault ? flagDefault : "home";
 
 const flagPage = (prevState = initialState, action) => {
-    console.log("Inside reducer Flag Page Ruducer");
     switch (action.type) {
         case CHANGE_FLAG_PAGE: {
             prevState = action.flag;

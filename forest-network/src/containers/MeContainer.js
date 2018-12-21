@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
-import MeComponent from './../components/MeComponent'
+import {MeComponent} from '../components/MeComponent'
+import { connect } from 'react-redux';
 
 class MeContainer extends Component {
 	render() {
 		return (
 			<div>
-				<MeComponent>
+				<MeComponent 
+					flagMe={this.props.flagMe}
+					userProfileReducer={this.props.userProfileReducer}>
 				</MeComponent>
 			</div>
 		);
 	}
 }
 
-export default MeContainer;
+const mapStateToProps = (state) => ({
+    userProfileReducer: state.userProfileReducer,
+    tweetsUserReducer: state.tweetsUserReducer,
+    flagMe: state.flagMeReducer
+})
+
+export default connect(mapStateToProps, null)(MeContainer);
+// export default MeContainer;
