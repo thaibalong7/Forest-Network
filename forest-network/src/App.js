@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import HomeContainer from './containers/HomeContainer'
-import MeContainer from './containers/MeContainer'
-import NotificationContainer from './containers/NotificationContainer'
-import NavigationBar from './components/Header/NavigationBar';
 import { connect } from "react-redux";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";

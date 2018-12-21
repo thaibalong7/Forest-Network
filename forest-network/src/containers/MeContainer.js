@@ -5,12 +5,10 @@ import { connect } from 'react-redux';
 class MeContainer extends Component {
 	render() {
 		return (
-			<div>
-				<MeComponent 
-					flagMe={this.props.flagMe}
-					userProfileReducer={this.props.userProfileReducer}>
-				</MeComponent>
-			</div>
+			<MeComponent 
+				flagMe={this.props.flagMe}
+				userProfileReducer={this.props.userProfileReducer}>
+			</MeComponent>
 		);
 	}
 }

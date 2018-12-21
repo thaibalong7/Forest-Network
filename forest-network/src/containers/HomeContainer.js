@@ -4,10 +4,8 @@ import Home from '.././components/Home'
 class HomeContainer extends Component {
 	render() {
 		return (
-			<div>
-				<Home flag="home">
-				</Home>
-			</div>
+			<Home flag="home">
+			</Home>
 		);
 	}
 }

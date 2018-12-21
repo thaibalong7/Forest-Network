@@ -1,30 +1,31 @@
 import React, { Component } from 'react';
 import '../styles/Home.css';
 import '../index.css';
-import { connect } from 'react-redux';
-import FollowingContainer from '../containers/FollowingContainer';
-import FollowerContainer from '../containers/FollowerContainer';
-import HistoricalTransactionContainer from '../containers/HistoricalTransactionContainer';
+import "../styles/Follow.css";
+import { BrowserRouter as Link, withRouter } from "react-router-dom";
 
-function renderTweets(props) {
-    //dựa vào danh sách tweets có trong props để render
-    return (
-        <div>
-            <a href="#" className="text-black mr-6 no-underline hover-underline">Tweets</a>
-            
+class HistoricalTransaction extends Component {
+    render() {
+        console.log("Historical Transaction");
+        return (
+            <div className="w-full lg:w-1/2 bg-white mb-4">
+            <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
+                <a href="#" className="text-black mr-6 no-underline hover-underline">Historical Transaction</a>
+            </div>
+
             <div className="flex border-b border-solid border-grey-light">
                 <div className="w-1/8 text-right pl-3 pt-3">
                     <div><i className="fa fa-thumb-tack text-teal mr-2"></i></div>
-                    <div><a href="#"><img src={props.userProfileReducer.avatarUrl} alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
+                    <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_tailwind.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
                 </div>
                 <div className="w-7/8 p-3 pl-0">
                     <div className="text-xs text-grey-dark">Pinned Tweet</div>
                     <div className="flex justify-between">
                         <div>
-                            <span className="font-bold"><a href="#" className="text-black">{props.userProfileReducer.name}</a></span>
-                            <span className="text-grey-dark">@{props.userProfileReducer.link}</span>
+                            <span className="font-bold"><a href="#" className="text-black">Tailwind CSS</a></span>
+                            <span className="text-grey-dark">@tailwindcss</span>
                             <span className="text-grey-dark">&middot;</span>
-                            <span className="text-grey-dark">04 Dec 2018</span>
+                            <span className="text-grey-dark">15 Dec 2017</span>
                         </div>
                         <div>
                             <a href="#" className="text-grey-dark hover:text-teal"><i className="fa fa-chevron-down"></i></a>
@@ -52,17 +53,17 @@ function renderTweets(props) {
             <div className="flex border-b border-solid border-grey-light">
                 <div className="w-1/8 text-right pl-3 pt-3">
                     <div><i className="fa fa-retweet text-grey-dark mr-2"></i></div>
-                    <div><a href="#"><img src={props.userProfileReducer.avatarUrl} alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
+                    <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_adam.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
                 </div>
 
                 <div className="w-7/8 p-3 pl-0">
                     <div className="text-xs text-grey-dark">Tailwind CSS Retweeted</div>
                     <div className="flex justify-between">
                         <div>
-                            <span className="font-bold"><a href="#" className="text-black">{props.userProfileReducer.name}</a></span>
-                            <span className="text-grey-dark">@{props.userProfileReducer.link}</span>
+                            <span className="font-bold"><a href="#" className="text-black">Adam Wathan</a></span>
+                            <span className="text-grey-dark">@adamwathan</span>
                             <span className="text-grey-dark">&middot;</span>
-                            <span className="text-grey-dark">01 Dec 2018</span>
+                            <span className="text-grey-dark">7 Dec 2017</span>
                         </div>
                         <div>
                             <a href="#" className="text-grey-dark hover:text-teal"><i className="fa fa-chevron-down"></i></a>
@@ -89,7 +90,7 @@ function renderTweets(props) {
 
             <div className="flex border-b border-solid border-grey-light">
                 <div className="w-1/8 text-right pl-3 pt-3">
-                    <div><a href="#"><img src={props.userProfileReducer.avatarUrl} alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
+                    <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_tailwind.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
                 </div>
 
                 <div className="w-7/8 p-3 pl-0">
@@ -165,39 +166,9 @@ function renderTweets(props) {
                     </div>
                 </div>
             </div>
-        </div>)
+        </div>
+        );
+    }
 }
 
-export const MeComponent = (props) => {
-    return (
-            <div className="w-full lg:w-1/2 bg-white mb-4">
-                <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
-                    {                       
-                    props.flagMe === "me"?
-                    renderTweets(props):null
-                    }
-                </div>
-                {
-                    props.flagMe === "following"?
-                    <FollowingContainer/>:null
-                }
-                {
-                    props.flagMe === "follower"?
-                    <FollowerContainer/>:null
-                }
-                {
-                    props.flagMe === "history" ?
-                    <HistoricalTransactionContainer/>:null
-                }
-            </div>
-    );
-}
-
-// const mapStateToProps = (state) => ({
-//     userProfileReducer: state.userProfileReducer,
-//     tweetsUserReducer: state.tweetsUserReducer,
-//     flagMe: state.flagMeReducer
-// })
-
-
-// export default connect(mapStateToProps, null)(MeComponent);
+export default withRouter(HistoricalTransaction);

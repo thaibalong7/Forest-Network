@@ -27,29 +27,22 @@ class NavigationBar extends Component {
         var homeStyles, notiStyles, meStyles;
         console.log("----------------");
         console.log(this.props.flagPage);
-        if (this.props.flagPage === "home") {
-            console.log("Here home");
-            homeStyles = componentSelected;
-            notiStyles = meStyles = componentUnselected;
-        }
-        else if (this.props.flagPage === "me") {
+        if (this.props.flagPage === "me") {
             console.log("Here me");
             meStyles = componentSelected;
             notiStyles = homeStyles = componentUnselected;
         }
-        else {
-            console.log("Here notiiii");
-            notiStyles = componentSelected;
-            meStyles = homeStyles = componentUnselected;
-        }
-        
+        else{
+            console.log("Here home");
+            homeStyles = componentSelected;
+            notiStyles = meStyles = componentUnselected;
+        }   
         return (
             <div className="bg-white">
                 <div className="container mx-auto flex flex-col lg:flex-row items-center py-2">
                     <nav className="w-full lg:w-2/5">
                         <Link to="/home" onClick={() => this.onChangeFlagPage("home")} className={homeStyles}><i className="fa fa-home fa-lg"></i>  Home</Link>
                         {/* <a href="#" className="text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal hover:border-teal hover:no-underline"><i className="fa fa-bolt fa-lg"></i> Moments</a> */}
-                        <Link to="/home/notifications" onClick={() => this.onChangeFlagPage("noti")} className={notiStyles}><i className="fa fa-bell fa-lg"></i>  Notifications</Link>
                         <Link to="/home/me" onClick={() => this.onChangeFlagPage("me")} className={meStyles}><i className="fa fa-user fa-lg"></i>  Me   </Link>
                     </nav>
                     <div className="w-full lg:w-1/5 text-center my-4 lg:my-0"><a href="#"><i className="fa fa-twitter fa-lg text-blue"></i></a></div>
@@ -95,14 +88,6 @@ class NavigationBar extends Component {
                                 </div>
                                 : null
                         }
-                        {/* <div className="w-full lg:w-1/4 flex my-4 lg:my-0 lg:justify-end items-center">
-                        <div className="mr-6">
-                            <button class="bg-teal hover:bg-teal-dark text-white font-medium py-2 px-4 rounded-full">Following</button>
-                        </div>
-                        <div>
-                            <a href="#" className="text-grey-dark"><i className="fa fa-ellipsis-v fa-lg"></i></a>
-                        </div>
-                    </div> */}
                     </div>
                     {/* <!-- End Header --> */}
                 </div>
