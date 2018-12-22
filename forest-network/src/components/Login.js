@@ -6,6 +6,12 @@ import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-d
 
 class Login extends Component {
     event_click() {
+        
+    }
+
+    event_click_link_create()
+    {
+        
     }
 
     render() {
@@ -31,12 +37,23 @@ class Login extends Component {
                                 </span>
                             </div>
                             <div className="container-login100-form-btn">
-                                <Link to="/home">
-                                    <button className="login100-form-btn">
+                                <Link to = "/home">
+                                    <button className="login100-form-btn" >
                                         Login
                                     </button>
                                 </Link>
                             </div>
+
+                            <div className="text-center p-t-136">
+                                <Link to = '/create' style = {{color: 'black'}}>
+                                    <h3>
+						                <text>
+							                Create your Account
+							                <i className="fa fa-long-arrow-right m-l-5"></i>
+						                </text>
+                                    </h3>
+                                </Link>
+					        </div>
                         </form>
                     </div>
                 </div>
