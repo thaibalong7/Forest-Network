@@ -174,27 +174,27 @@ export const MeComponent = (props) => {
         <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
             {       
                 props.flagMe === "me"?                
-                <div class="updateStatus">
+                <div className="updateStatus">
                     <div >
                         <div >
-                            <div class="posttweettacontainer">
+                            <div className="posttweettacontainer">
                                 <textarea 
                                     id="posttweetta" 
-                                    class="posttweetta" 
+                                    className="posttweetta" 
                                     placeholder="What's happening?" 
                                     rows="5" 
                                     cols="50">
                                 </textarea>
-                                <div class="posttweetcountcont">
+                                <div className="posttweetcountcont">
                                 </div>
                             </div>
-                            <div class="posttweetbutcont">
-                                <button id="posttweetbut" class="posttweetbut">Post</button>
+                            <div className="posttweetbutcont">
+                                <button id="posttweetbut" className="posttweetbut">Post</button>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <ul id="tweetscontainer" class="tweetscontainer">
+                        <ul id="tweetscontainer" className="tweetscontainer">
                             
                         </ul>
                     </div>

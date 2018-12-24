@@ -19,6 +19,13 @@ class LoggedContainer extends Component {
         history.push('/');
     }
     render() {
+        console.log(this.props.match.url);
+        // if(this.props.match.url === "/home" || this.props.match.url === "/home/"){
+        //     this.props.change_flag_page("home");
+        // }
+        // if(this.props.match.url === "/home/me" || this.props.match.url === "/home/me/"){
+        //     this.props.change_flag_page("me");
+        // }
         return (
             <Router>
                 <div className="bg-grey-light font-sans">

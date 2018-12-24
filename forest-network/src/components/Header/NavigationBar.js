@@ -37,6 +37,7 @@ class NavigationBar extends Component {
             homeStyles = componentSelected;
             notiStyles = meStyles = componentUnselected;
         }   
+
         return (
             <div className="bg-white">
                 <div className="container mx-auto flex flex-col lg:flex-row items-center py-2">
