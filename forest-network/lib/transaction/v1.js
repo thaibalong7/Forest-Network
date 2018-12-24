@@ -163,52 +163,52 @@ function decode(data) {
     signature: tx.signature,
   };
 }
-encodePostParams = (postParam) =>{
+const encodePostParams = (postParam) =>{
   return PostParams.encode(postParam)
 }
-decodePostParams = (postParam) =>{
+const decodePostParams = (postParam) =>{
   return PostParams.decode(postParam)
 }
-encodePost = (postParam) => {
+const encodePost = (postParam) => {
   return PlainTextContent.encode(postParam)
 }
-encodeFollowings = (FollowingsParam) => {
+const encodeFollowings = (FollowingsParam) => {
   return Followings.encode(FollowingsParam)
 }
-decodeFollowings = (FollowingsParam) => {
+const decodeFollowings = (FollowingsParam) => {
   return Followings.decode(FollowingsParam)
 }
-decodePost = (postParam) => {
+const decodePost = (postParam) => {
   return PlainTextContent.decode(postParam)
 }
-encodeCreateAccount = (CreateAccount) => {
+const encodeCreateAccount = (CreateAccount) => {
   return CreateAccountParams.encode({
     ...CreateAccount,
     address: Buffer.from(base32.decode(CreateAccount.address)),
   });
 }
-decodeCreateAccount = (CreateAccount) => {
+const decodeCreateAccount = (CreateAccount) => {
   return CreateAccountParams.decode(CreateAccount);
 }
-encodePayment = (payment) => {
+const encodePayment = (payment) => {
   return PaymentParams.encode({
     ...payment,
     address: Buffer.from(base32.decode(payment.address)),
   });
 }
-decodePayment = (payment) => {
+const decodePayment = (payment) => {
   return PaymentParams.decode(payment);
 }
-encodeUpdateAccount = (UpdateAccount) => {
+const encodeUpdateAccount = (UpdateAccount) => {
   return UpdateAccountParams.encode(UpdateAccount);
 }
-decodeUpdateAccount = (UpdateAccount) => {
+const decodeUpdateAccount = (UpdateAccount) => {
   return UpdateAccountParams.decode(UpdateAccount);
 }
-encodeReactContent = (Content) =>{
+const encodeReactContent = (Content) =>{
   return ReactContent.encode(Content);
 }
-decodeReactContent = (Content) =>{
+const decodeReactContent = (Content) =>{
   return ReactContent.decode(Content);
 }
 module.exports = {

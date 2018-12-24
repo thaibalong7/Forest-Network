@@ -5,17 +5,25 @@ import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-d
 
 
 class Login extends Component {
-    event_click() {
-        
+    constructor(props) {
+        super(props)
+        this.state = {
+            secret_key: ''
+        }
     }
-
-    event_click_link_create()
-    {
-        
+    onChangeSecretKey = (e) => {
+        let target = e.target;
+        let value = target.value;
+        this.setState({
+            secret_key: value
+        });
     }
-
+    handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            this.props.login(this.state.secret_key);
+        }
+    }
     render() {
-        console.log("login");
         return (
             <div>
                 <div className="container-login100">
@@ -25,36 +33,40 @@ class Login extends Component {
                         <div className="login100-pic js-tilt" data-tilt>
                             <img src="images/img-01.png" alt="IMG" />
                         </div>
-                        <form className="login100-form validate-form">
+                        <div className="login100-form validate-form">
                             <span className="login100-form-title">
                                 Member Login
                             </span>
-                            <div className="wrap-input100 validate-input" data-validate="Password is required">
-                                <input className="input100" type="text" name="pass" placeholder="Enter private key" />
+                            <div className="wrap-input100 validate-input" >
+                                <input className="input100"
+                                    type="text"
+                                    name="secret_key" id="secret_key" 
+                                    placeholder="Enter secret key"
+                                    value={this.state.secret_key}
+                                    onChange={this.onChangeSecretKey}
+                                    onKeyPress={this.handleKeyPress}
+                                />
                                 <span className="focus-input100"></span>
                                 <span className="symbol-input100">
                                     <i className="fa fa-lock" aria-hidden="true"></i>
                                 </span>
                             </div>
                             <div className="container-login100-form-btn">
-                                <Link to = "/home">
-                                    <button className="login100-form-btn" >
-                                        Login
-                                    </button>
-                                </Link>
+                                <button className="login100-form-btn" onClick={() => this.props.login(this.state.secret_key)}>
+                                    Login
+                                </button>
                             </div>
-
                             <div className="text-center p-t-136">
-                                <Link to = '/create' style = {{color: 'black'}}>
+                                <Link to='/create' style={{ color: 'black' }}>
                                     <h3>
-						                <text>
-							                Create your Account
+                                        <div>
+                                            Create your Account
 							                <i className="fa fa-long-arrow-right m-l-5"></i>
-						                </text>
+                                        </div>
                                     </h3>
                                 </Link>
-					        </div>
-                        </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

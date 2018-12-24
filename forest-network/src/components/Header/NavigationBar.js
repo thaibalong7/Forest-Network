@@ -4,7 +4,6 @@ import '../../index.css';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
 import { change_flag_page, change_flag_me } from "../../actions/index";
-
 class NavigationBar extends Component {
     onChangeFlagPage(event) {
         console.log(event);
@@ -16,7 +15,19 @@ class NavigationBar extends Component {
             this.props.change_flag_page(event);
         }
     }
-
+    renderAvatar = (_className) => {
+        if (this.props.userProfileReducer.avatar === null) {
+            return (
+                <img src="images/default-avatar.jpg" alt="avatar" className={_className} />
+            )
+        }
+        else {
+            const src = 'data:image/jpeg;base64,' + Buffer.from(this.props.userProfileReducer.avatar).toString('base64');
+            return (
+                <img src={src} alt="avatar" className={_className} />
+            )
+        }
+    }
     onChangeFlagMe(event) {
         this.props.change_flag_me(event);
     }
@@ -32,11 +43,11 @@ class NavigationBar extends Component {
             meStyles = componentSelected;
             notiStyles = homeStyles = componentUnselected;
         }
-        else{
+        else {
             console.log("Here home");
             homeStyles = componentSelected;
             notiStyles = meStyles = componentUnselected;
-        }   
+        }
 
         return (
             <div className="bg-white">
@@ -46,13 +57,13 @@ class NavigationBar extends Component {
                         {/* <a href="#" className="text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal hover:border-teal hover:no-underline"><i className="fa fa-bolt fa-lg"></i> Moments</a> */}
                         <Link to="/home/me" onClick={() => this.onChangeFlagPage("me")} className={meStyles}><i className="fa fa-user fa-lg"></i>  Me   </Link>
                     </nav>
-                    <div className="w-full lg:w-1/5 text-center my-4 lg:my-0"><a href="#"><i className="fa fa-twitter fa-lg text-blue"></i></a></div>
+                    <div className="w-full lg:w-1/5 text-center my-4 lg:my-0"><i className="fa fa-twitter fa-lg text-blue"></i></div>
                     <div className="w-full lg:w-2/5 flex lg:justify-end">
                         <div className="mr-4 relative">
                             <input type="text" className="bg-grey-lighter h-8 px-4 py-2 text-xs w-48 rounded-full" placeholder="Search Twitter" />
                             <span className="flex items-center absolute pin-r pin-y mr-3"><i className="fa fa-search text-grey"></i></span>
                         </div>
-                        <div className="mr-4"><a href="#"><img src={this.props.userProfileReducer.avatarUrl} alt="avatar" className="h-8 w-8 rounded-full" /></a></div>
+                        <div className="mr-4"><Link to="/home/me">{this.renderAvatar("h-8 w-8 rounded-full")}</Link></div>
                         <div><button className="bg-teal hover:bg-teal-dark text-white font-medium py-2 px-4 rounded-full" onClick={this.props.log_out}>Log-out</button></div>
                     </div>
                 </div>
@@ -60,8 +71,7 @@ class NavigationBar extends Component {
                 <div className="bg-white shadow">
                     <div className="container mx-auto flex flex-col lg:flex-row items-center lg:relative">
                         <div className="w-full lg:w-1/5">
-                            <img src={this.props.userProfileReducer.avatarUrl}
-                                alt="logo" className="rounded-full h-48 w-48 lg:absolute lg:pin-l lg:pin-t lg:-mt-24" />
+                            {this.renderAvatar("rounded-full h-48 w-48 lg:absolute lg:pin-l lg:pin-t lg:-mt-24")}
                         </div>
                         {
                             this.props.flagPage === "me" ?
