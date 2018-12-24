@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/Home.css';
-import '../index.css';
+import '../styles/index.css';
+import '../styles/status.css';
 import { connect } from 'react-redux';
 import FollowingContainer from '../containers/FollowingContainer';
 import FollowerContainer from '../containers/FollowerContainer';
@@ -165,31 +166,54 @@ function renderTweets(props) {
                     </div>
                 </div>
             </div>
-        </div>)
+        </div>);
 }
 
 export const MeComponent = (props) => {
     return (
-            <div className="w-full lg:w-1/2 bg-white mb-4">
-                <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
-                    {                       
-                    props.flagMe === "me"?
-                    renderTweets(props):null
-                    }
-                </div>
-                {
-                    props.flagMe === "following"?
-                    <FollowingContainer/>:null
-                }
-                {
-                    props.flagMe === "follower"?
-                    <FollowerContainer/>:null
-                }
-                {
-                    props.flagMe === "history" ?
-                    <HistoricalTransactionContainer/>:null
-                }
-            </div>
+        <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
+            {       
+                props.flagMe === "me"?                
+                <div class="updateStatus">
+                    <div >
+                        <div >
+                            <div class="posttweettacontainer">
+                                <textarea 
+                                    id="posttweetta" 
+                                    class="posttweetta" 
+                                    placeholder="What's happening?" 
+                                    rows="5" 
+                                    cols="50">
+                                </textarea>
+                                <div class="posttweetcountcont">
+                                </div>
+                            </div>
+                            <div class="posttweetbutcont">
+                                <button id="posttweetbut" class="posttweetbut">Post</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <ul id="tweetscontainer" class="tweetscontainer">
+                            
+                        </ul>
+                    </div>
+                    {renderTweets(props)}
+                </div>:null
+            }
+            {
+                props.flagMe === "following"?
+                <FollowingContainer/>:null
+            }
+            {
+                props.flagMe === "follower"?
+                <FollowerContainer/>:null
+            }
+            {
+                props.flagMe === "history" ?
+                <HistoricalTransactionContainer/>:null
+            }
+        </div>
     );
 }
 
