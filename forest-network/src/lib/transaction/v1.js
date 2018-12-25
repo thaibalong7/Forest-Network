@@ -1,6 +1,6 @@
-const vstruct = require('varstruct');
-const base32 = require('base32.js');
-const { Keypair } = require('stellar-base');
+import vstruct from 'varstruct';
+import base32 from 'base32.js';
+import { Keypair } from 'stellar-base';
 
 const Transaction = vstruct([
   { name: 'version', type: vstruct.UInt8 },
@@ -58,7 +58,7 @@ const ReactContent = vstruct([
 ]);
 
 
-function encode(tx) {
+export function encode(tx) {
   let params, operation;
   if (tx.version !== 1) {
     throw Error('Wrong version');
@@ -113,7 +113,7 @@ function encode(tx) {
   });
 }
 
-function decode(data) {
+export function decode(data) {
   const tx = Transaction.decode(data);
   if (tx.version !== 1) {
     throw Error('Wrong version');
@@ -163,69 +163,51 @@ function decode(data) {
     signature: tx.signature,
   };
 }
-const encodePostParams = (postParam) =>{
+export const encodePostParams = (postParam) =>{
   return PostParams.encode(postParam)
 }
-const decodePostParams = (postParam) =>{
+export const decodePostParams = (postParam) =>{
   return PostParams.decode(postParam)
 }
-const encodePost = (postParam) => {
+export const encodePost = (postParam) => {
   return PlainTextContent.encode(postParam)
 }
-const encodeFollowings = (FollowingsParam) => {
+export const encodeFollowings = (FollowingsParam) => {
   return Followings.encode(FollowingsParam)
 }
-const decodeFollowings = (FollowingsParam) => {
+export const decodeFollowings = (FollowingsParam) => {
   return Followings.decode(FollowingsParam)
 }
-const decodePost = (postParam) => {
+export const decodePost = (postParam) => {
   return PlainTextContent.decode(postParam)
 }
-const encodeCreateAccount = (CreateAccount) => {
+export const encodeCreateAccount = (CreateAccount) => {
   return CreateAccountParams.encode({
     ...CreateAccount,
     address: Buffer.from(base32.decode(CreateAccount.address)),
   });
 }
-const decodeCreateAccount = (CreateAccount) => {
+export const decodeCreateAccount = (CreateAccount) => {
   return CreateAccountParams.decode(CreateAccount);
 }
-const encodePayment = (payment) => {
+export const encodePayment = (payment) => {
   return PaymentParams.encode({
     ...payment,
     address: Buffer.from(base32.decode(payment.address)),
   });
 }
-const decodePayment = (payment) => {
+export const decodePayment = (payment) => {
   return PaymentParams.decode(payment);
 }
-const encodeUpdateAccount = (UpdateAccount) => {
+export const encodeUpdateAccount = (UpdateAccount) => {
   return UpdateAccountParams.encode(UpdateAccount);
 }
-const decodeUpdateAccount = (UpdateAccount) => {
+export const decodeUpdateAccount = (UpdateAccount) => {
   return UpdateAccountParams.decode(UpdateAccount);
 }
-const encodeReactContent = (Content) =>{
+export const encodeReactContent = (Content) =>{
   return ReactContent.encode(Content);
 }
-const decodeReactContent = (Content) =>{
+export const decodeReactContent = (Content) =>{
   return ReactContent.decode(Content);
 }
-module.exports = {
-  encode,
-  decode,
-  encodePost,
-  decodePost,
-  encodeFollowings,
-  decodeFollowings,
-  encodeCreateAccount,
-  decodeCreateAccount,
-  encodePayment,
-  decodePayment,
-  encodeUpdateAccount,
-  decodeUpdateAccount,
-  encodePostParams,
-  decodePostParams,
-  encodeReactContent,
-  decodeReactContent
-};

@@ -1,8 +1,10 @@
 import {
     CHANGE_USER_INFO,
-    LOAD_TWEETS,
+    UPDATE_TWEETS_USER,
     CHANGE_FLAG_PAGE,
-    CHANGE_FLAG_ME
+    CHANGE_FLAG_ME,
+    UPDATE_TWEETS_HOME,
+    LOADMORE_TWEETS_HOME
 } from './types'
 
 export const change_user_info = (user_info) => {
@@ -12,9 +14,24 @@ export const change_user_info = (user_info) => {
     }
 }
 
-export const load_tweets = () => {
+export const update_tweets_user = (tweets_user) => {
     return {
-        type: LOAD_TWEETS,
+        type: UPDATE_TWEETS_USER,
+        tweets_user
+    }
+}
+
+export const update_tweets_home = (tweets_home) => {
+    return {
+        type: UPDATE_TWEETS_HOME,
+        tweets_home
+    }
+}
+
+export const loadmore_tweets_home = (tweets_home) => {
+    return {
+        type: LOADMORE_TWEETS_HOME,
+        tweets_home
     }
 }
 
@@ -31,3 +48,4 @@ export const change_flag_me = (flag) => {
         flag
     }
 }
+

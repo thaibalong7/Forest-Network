@@ -3,21 +3,189 @@ import '../styles/Home.css';
 import '../index.css';
 import '../styles/status.css';
 
-//import { BrowserRouter as Link, withRouter } from "react-router-dom";
-
+async function asyncForEach(arr, cb) {
+    for (let i = 0; i < arr.length; i++) {
+        await cb(arr[i], i);
+    }
+}
 class Home extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            renderTweets: [],
+        }
+
+    }
+    renderAvatar = (avatar, _className) => {
+        const src = 'data:image/jpeg;base64,' + Buffer.from(avatar).toString('base64');
+        return (<img src={src} alt="avatar" className={_className} />)
+    }
+    render_a_tweet = (tweet) => {
+        if (tweet.operation === 'create_account') {
+            return (
+                <div className="flex border-b border-solid border-grey-light">
+                    <div className="w-1/8 text-right pl-3 pt-3">
+                        <div><span >{this.renderAvatar(tweet.creatorAvatar, "rounded-full h-12 w-12 mr-2")}</span></div>
+                    </div>
+                    <div className="w-7/8 p-3 pl-0">
+                        <div className="flex justify-between">
+                            <div>
+                                <span className="font-bold"><span className="text-black"><h4 className="font-bold">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}</h4></span></span>
+                                <span className="text-grey-dark"></span>
+                                {/* <span className="text-grey-dark">&middot;</span> */}
+                                <span className="text-grey-dark">{(new Date(tweet.createAt)).toString()}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="mb-4">
+                                <p>
+                                    <span className="mb-6">Create new account </span>
+                                    <span className="mb-6 text-teal">{tweet.param.address}</span>
+                                    {/* <p><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_tweet1.jpg" alt="tweet image" className="border border-solid border-grey-light rounded-sm" /></p> */}
+                                </p>
+                            </div>
+                        </div>
+                        <div className="pb-2">
+                            <span className="mr-8"><span className="text-grey-dark hover:no-underline hover:text-blue-light"><i className="fa fa-comment fa-lg mr-2"></i> 0</span></span>
+                            <span className="mr-8"><span className="text-grey-dark hover:no-underline hover:text-red"><i className="fa fa-heart fa-lg mr-2"></i> 0</span></span>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        else if (tweet.operation === 'payment') {
+            return (
+                <div className="flex border-b border-solid border-grey-light">
+                    <div className="w-1/8 text-right pl-3 pt-3">
+                        <div><span>{this.renderAvatar(tweet.creatorAvatar, "rounded-full h-12 w-12 mr-2")}</span></div>
+                    </div>
+                    <div className="w-7/8 p-3 pl-0">
+                        <div className="flex justify-between">
+                            <div>
+                                <span className="font-bold"><span className="text-black"><h4 className="font-bold">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}</h4></span></span>
+                                <span className="text-grey-dark"></span>
+                                {/* <span className="text-grey-dark">&middot;</span> */}
+                                <span className="text-grey-dark">{(new Date(tweet.createAt)).toString()}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="mb-4">
+                                <p className="mb-6"><span className="text-teal">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}</span> sent to <span className="text-teal">{tweet.param.name == null ? tweet.param.address : tweet.param.name}</span> {tweet.param.amount} CEL</p>
+                                {/* <p className="mb-6"><Link to="/home/me/123">{tweet.param.value}</Link></p> */}
+                                {/* <p><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_tweet1.jpg" alt="tweet image" className="border border-solid border-grey-light rounded-sm" /></p> */}
+                            </div>
+                        </div>
+                        <div className="pb-2">
+                            <span className="mr-4"><span className="text-grey-dark hover:no-underline hover:text-blue-light"><i className="fa fa-comment fa-lg mr-2"></i> 0</span></span>
+                            <span className="mr-4"><span className="text-grey-dark hover:no-underline hover:text-red"><i className="fa fa-heart fa-lg mr-2"></i> 0</span></span>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        else if (tweet.operation === 'update_account') {
+            if (tweet.param.key === 'name') {
+                return (<div className="flex border-b border-solid border-grey-light">
+                    <div className="w-1/8 text-right pl-3 pt-3">
+                        <div><span >{this.renderAvatar(tweet.creatorAvatar, "rounded-full h-12 w-12 mr-2")}</span></div>
+                    </div>
+                    <div className="w-7/8 p-3 pl-0">
+                        <div className="flex justify-between">
+                            <div>
+                                <span className="font-bold"><span className="text-black"><h4 className="font-bold">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}</h4></span></span>
+                                <span className="text-grey-dark"></span>
+                                {/* <span className="text-grey-dark">&middot;</span> */}
+                                <span className="text-grey-dark">{(new Date(tweet.createAt)).toString()}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="mb-4">
+                                <p>
+                                    <span className="mb-6">Update name to </span>
+                                    <span className="mb-6"><span >{tweet.param.value}</span></span>
+                                    {/* <p><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_tweet1.jpg" alt="tweet image" className="border border-solid border-grey-light rounded-sm" /></p> */}
+                                </p>
+                            </div>
+                        </div>
+                        <div className="pb-2">
+                            <span className="mr-4"><span className="text-grey-dark hover:no-underline hover:text-blue-light"><i className="fa fa-comment fa-lg mr-2"></i> 0</span></span>
+                            <span className="mr-4"><span className="text-grey-dark hover:no-underline hover:text-red"><i className="fa fa-heart fa-lg mr-2"></i> 0</span></span>
+                        </div>
+                    </div>
+                </div>)
+            }
+            else if (tweet.param.key === 'picture') {
+                return (<div className="flex border-b border-solid border-grey-light">
+                    <div className="w-1/8 text-right pl-3 pt-3">
+                        <div><span >{this.renderAvatar(tweet.creatorAvatar, "rounded-full h-12 w-12 mr-2")}</span></div>
+                    </div>
+                    <div className="w-7/8 p-3 pl-0">
+                        <div className="flex justify-between">
+                            <div>
+                                <span className="font-bold"><span className="text-black"><h4 className="font-bold">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}</h4></span></span>
+                                <span className="text-grey-dark"></span>
+                                {/* <span className="text-grey-dark">&middot;</span> */}
+                                <span className="text-grey-dark">{(new Date(tweet.createAt)).toString()}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="mb-4">
+                                <p className="mb-6 ">Update new avatar</p>
+                                <p><img src={'data:image/jpeg;base64,' + tweet.param.value} alt="avatar" className="border border-solid border-grey-light rounded-sm" /></p>
+                            </div>
+                        </div>
+                        <div className="pb-2">
+                            <span className="mr-4"><span className="text-grey-dark hover:no-underline hover:text-blue-light"><i className="fa fa-comment fa-lg mr-2"></i> 0</span></span>
+                            <span className="mr-4"><span className="text-grey-dark hover:no-underline hover:text-red"><i className="fa fa-heart fa-lg mr-2"></i> 0</span></span>
+                        </div>
+                    </div>
+                </div>)
+            }
+            else if (tweet.param.key === 'followings') {
+
+            }
+        }
+        else if (tweet.operation === 'post') {
+            return (<div className="flex border-b border-solid border-grey-light">
+                <div className="w-1/8 text-right pl-3 pt-3">
+                    <div><span >{this.renderAvatar(tweet.creatorAvatar, "rounded-full h-12 w-12 mr-2")}</span></div>
+                </div>
+                <div className="w-7/8 p-3 pl-0">
+                    <div className="flex justify-between">
+                        <div>
+                            <span className="font-bold"><span className="text-black"><h4 className="font-bold">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}</h4></span></span>
+                            <span className="text-grey-dark"></span>
+                            {/* <span className="text-grey-dark">&middot;</span> */}
+                            <span className="text-grey-dark">{(new Date(tweet.createAt)).toString()}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="mb-4">
+                            <p className="mb-6 ">{tweet.param.value}</p>
+                            {/* <p><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_tweet1.jpg" alt="tweet image" className="border border-solid border-grey-light rounded-sm" /></p> */}
+                        </div>
+                    </div>
+                    <div className="pb-2">
+                        <span className="mr-4"><span className="text-grey-dark hover:no-underline hover:text-blue-light"><i className="fa fa-comment fa-lg mr-2"></i> 0</span></span>
+                        <span className="mr-4"><span className="text-grey-dark hover:no-underline hover:text-red"><i className="fa fa-heart fa-lg mr-2"></i> 0</span></span>
+                    </div>
+                </div>
+            </div>)
+        }
+    }
     render() {
         return (
             <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
+                {/* khung đăng bài */}
                 <div className="updateStatus">
                     <div >
                         <div >
                             <div className="posttweettacontainer">
-                                <textarea 
-                                    id="posttweetta" 
-                                    className="posttweetta" 
-                                    placeholder="What's happening?" 
-                                    rows="5" 
+                                <textarea
+                                    id="posttweetta"
+                                    className="posttweetta"
+                                    placeholder="What's happening?"
+                                    rows="5"
                                     cols="50">
                                 </textarea>
                                 <div className="posttweetcountcont">
@@ -30,12 +198,18 @@ class Home extends Component {
                     </div>
                     <div>
                         <ul id="tweetscontainer" className="tweetscontainer">
-                            
+
                         </ul>
                     </div>
                 </div>
-                <a href="#" className="text-black mr-6 no-underline hover-underline">Tweets</a>
 
+
+                <div className="text-black mr-6 no-underline hover-underline"><h2>Tweets</h2></div>
+                {/* hiển thị các tweets */}
+                {/* {this.state.renderTweets} */}
+                {this.props.tweetsHome.map(tweet => {
+                    return this.render_a_tweet(tweet)
+                })}
                 <div className="flex border-b border-solid border-grey-light">
                     <div className="w-1/8 text-right pl-3 pt-3">
                         <div><i className="fa fa-thumb-tack text-teal mr-2"></i></div>
