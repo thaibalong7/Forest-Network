@@ -4,7 +4,8 @@ import {
     CHANGE_FLAG_PAGE,
     CHANGE_FLAG_ME,
     UPDATE_TWEETS_HOME,
-    LOADMORE_TWEETS_HOME
+    LOADMORE_TWEETS_HOME,
+    LOADMORE_TWEETS_USER
 } from './types'
 
 export const change_user_info = (user_info) => {
@@ -17,6 +18,13 @@ export const change_user_info = (user_info) => {
 export const update_tweets_user = (tweets_user) => {
     return {
         type: UPDATE_TWEETS_USER,
+        tweets_user
+    }
+}
+
+export const loadmore_tweets_user = (tweets_user) => {
+    return {
+        type: LOADMORE_TWEETS_USER,
         tweets_user
     }
 }
