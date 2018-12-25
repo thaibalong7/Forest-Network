@@ -5,7 +5,10 @@ import {
     CHANGE_FLAG_ME,
     UPDATE_TWEETS_HOME,
     LOADMORE_TWEETS_HOME,
+<<<<<<< HEAD
     LOAD_FOLLOWING,
+=======
+>>>>>>> 31c2da9adbc06ac2c278ef3b685ad3c466fc7489
     LOADMORE_TWEETS_USER
 } from './types'
 
@@ -19,6 +22,13 @@ export const change_user_info = (user_info) => {
 export const update_tweets_user = (tweets_user) => {
     return {
         type: UPDATE_TWEETS_USER,
+        tweets_user
+    }
+}
+
+export const loadmore_tweets_user = (tweets_user) => {
+    return {
+        type: LOADMORE_TWEETS_USER,
         tweets_user
     }
 }

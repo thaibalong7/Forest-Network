@@ -4,7 +4,38 @@ import '../index.css'
 import '../styles/style.css'
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
+import { sentUpdateNameTransaction } from '../lib/transaction/sendTransaction'
 class LeftSide extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            nameToChange: props.userProfileReducer.name
+        }
+    }
+    componentDidUpdate(prevProps) {
+        if (this.props.userProfileReducer.name !== prevProps.userProfileReducer.name) {
+            this.setState({ nameToChange: this.props.userProfileReducer.name })
+        }
+    }
+    ChangeName = (e) => {
+        this.setState({ nameToChange: e.target.value })
+    }
+    changeName = () => {
+        sentUpdateNameTransaction(this.state.nameToChange, this.props.userProfileReducer.sequence, (rs) => {
+            if (typeof rs === 'undefined') {
+                console.log('fail to update name')
+            }
+            else {
+                if (rs.height === '0') {
+                    console.log('fail to update name')
+                }
+                else {
+                    console.log('update name success')
+                }
+            }
+
+        })
+    }
     render() {
         var Balance = "Balance: " + this.props.userProfileReducer.balance;
         var Sequence = "Sequence: " + this.props.userProfileReducer.sequence;
@@ -12,11 +43,11 @@ class LeftSide extends Component {
         return (
             <div className="w-full lg:w-1/4 pl-4 lg:pl-0 pr-6 mt-8 mb-4">
                 <div>
-                <h2><div 
-                className="text-black font-bold no-underline hover:underline"
-                data-toggle="modal"
-                data-target="#modalchangename"
-                >{this.props.userProfileReducer.name}</div></h2>
+                    <h2><div
+                        className="text-black font-bold no-underline hover:underline"
+                        data-toggle="modal"
+                        data-target="#modalchangename"
+                    >{this.props.userProfileReducer.name}</div></h2>
 
 
                 </div>
@@ -66,10 +97,11 @@ class LeftSide extends Component {
                                             <input
                                                 type="text"
                                                 className="bg-grey-lighter h-8 px-4 py-2 text-xs w-48 rounded-full"
-                                                value = {this.props.userProfileReducer.name}
-                                                 />
+                                                value={this.state.nameToChange}
+                                                onChange={this.ChangeName}
+                                            />
                                         </div>
-                                        <button type="submit" className="style" data-dismiss="modal">Change</button>
+                                        <button className="style" data-dismiss="modal" onClick={this.changeName}>Change</button>
                                     </form>
                                 </div>
                             </div>

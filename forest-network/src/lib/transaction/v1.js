@@ -58,7 +58,7 @@ const ReactContent = vstruct([
 ]);
 
 
-export function encode(tx) {
+export function encodeTx(tx) {
   let params, operation;
   if (tx.version !== 1) {
     throw Error('Wrong version');
@@ -113,7 +113,7 @@ export function encode(tx) {
   });
 }
 
-export function decode(data) {
+export function decodeTx(data) {
   const tx = Transaction.decode(data);
   if (tx.version !== 1) {
     throw Error('Wrong version');
