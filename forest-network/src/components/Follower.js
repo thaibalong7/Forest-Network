@@ -29,7 +29,7 @@ class Follower extends Component {
                                     <span className="font-bold"><a href="#" className="text-black">Tailwind CSS</a></span>
                                 </div>
                                 <div>
-                                    <button class="btn-follower">Follower</button>
+                                    <button className="btn-follower">Follower</button>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +46,7 @@ class Follower extends Component {
                                     <span className="font-bold"><a href="#" className="text-black">Tailwind CSS</a></span>
                                 </div>
                                 <div>
-                                    <button class="btn-follower">Follower</button>
+                                    <button className="btn-follower">Follower</button>
                                 </div>
                             </div>
                         </div>

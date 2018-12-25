@@ -4,7 +4,9 @@ import {
     CHANGE_FLAG_PAGE,
     CHANGE_FLAG_ME,
     UPDATE_TWEETS_HOME,
-    LOADMORE_TWEETS_HOME
+    LOADMORE_TWEETS_HOME,
+    LOAD_FOLLOWING,
+    LOADMORE_TWEETS_USER
 } from './types'
 
 export const change_user_info = (user_info) => {
@@ -49,3 +51,23 @@ export const change_flag_me = (flag) => {
     }
 }
 
+export const load_following = (following) => {
+    return {
+        type: LOAD_FOLLOWING,
+        following
+    }
+}
+
+// export const load_follwer = (follwer) => {
+//     return {
+//         type: LOAD_FOLLOWWER,
+//         follwer
+//     }
+// }
+
+export const loadmore_tweets_user = (tweets_user) => {
+    return {
+        type: LOADMORE_TWEETS_USER,
+        tweets_user
+    }
+}

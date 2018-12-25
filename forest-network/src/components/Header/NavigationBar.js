@@ -77,26 +77,26 @@ class NavigationBar extends Component {
                                     {this.renderAvatar("rounded-full h-48 w-48 lg:absolute lg:pin-l lg:pin-t lg:-mt-24")}
                                 </div>
                             </a>
-                            <div class="_156n _23fw" >
+                            <div className="_156n _23fw" >
 						<a href="#" className="_156p _1o5e">
-							<li id="photo-choose-existing" class="photo-choose-existing upload-photo" role="presentation">
-								<div class="photo-selector">
-									<button class="btn styleinput" type="button">
+							<li id="photo-choose-existing" className="photo-choose-existing upload-photo" role="presentation">
+								<div className="photo-selector">
+									<button className="btn styleinput" type="button">
 										Change photo
 									</button>
-								 	<span class="photo-file-name">No file selected</span>
-									<div class="image-selector">
-										<input type="hidden" name="media_file_name" class="file-name"/>
-										<input type="hidden" name="media_data_empty" class="file-data"/>
-										<input type="file" name="media[]" class="file-input" tabindex="-1" title="Add Photo" accept="image/gif,image/jpeg,image/jpg,image/png"/>
+								 	<span className="photo-file-name">No file selected</span>
+									<div className="image-selector">
+										<input type="hidden" name="media_file_name" className="file-name"/>
+										<input type="hidden" name="media_data_empty" className="file-data"/>
+										<input type="file" name="media[]" className="file-input" tabindex="-1" title="Add Photo" accept="image/gif,image/jpeg,image/jpg,image/png"/>
 									</div>
 								</div>
 							</li>
-							<li id="photo-choose-webcam" class="u-hidden" role="presentation">
-								<button type="button" class="dropdown-link">Take photo</button>
+							<li id="photo-choose-webcam" className="u-hidden" role="presentation">
+								<button type="button" className="dropdown-link">Take photo</button>
 							</li>
-							<li id="photo-delete-image" class="u-hidden" role="presentation">
-							<button type="button" class="dropdown-link">Remove</button>
+							<li id="photo-delete-image" className="u-hidden" role="presentation">
+							<button type="button" className="dropdown-link">Remove</button>
 								</li>
 						</a>
 					    </div>

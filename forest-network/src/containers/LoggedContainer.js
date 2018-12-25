@@ -60,7 +60,7 @@ class LoggedContainer extends Component {
         }
     }
     render() {
-        console.log(this.props);
+        console.log(this.props.userProfileReducer);
         // if(this.props.match.url === "/home" || this.props.match.url === "/home/"){
         //     this.props.change_flag_page("home");
         // }
@@ -109,6 +109,6 @@ const mapDispatchToProps = (dispatch, props) => {
 }
 const mapStateToProps = (state) => ({
     userProfileReducer: state.userProfileReducer,
+});
 
-})
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoggedContainer));
