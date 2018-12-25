@@ -14,16 +14,54 @@ class Home extends Component {
         this.state = {
             renderTweets: [],
         }
-
+        // Binds our scroll event handler
+        window.onscroll = () => {
+            if (document.documentElement.scrollTop === document.documentElement.scrollHeight - document.documentElement.offsetHeight) {
+                this.props.loadMore();
+            }
+        };
+    }
+    componentDidMount() {
     }
     renderAvatar = (avatar, _className) => {
-        const src = 'data:image/jpeg;base64,' + Buffer.from(avatar).toString('base64');
-        return (<img src={src} alt="avatar" className={_className} />)
+        try {
+            const src = 'data:image/jpeg;base64,' + Buffer.from(avatar).toString('base64');
+            return (<img src={src} alt="avatar" className={_className} />)
+        }
+        catch (e) {
+            return (<img src="images/default-avatar.jpg" alt="avatar" className={_className} />)
+        }
     }
-    render_a_tweet = (tweet) => {
+    render_a_tweet = (tweet, i) => {
+        var createTime;
+        const lastSignInTime = new Date(tweet.createAt);
+        const curTime = new Date();
+        var seconds = Math.floor((curTime - (lastSignInTime)) / 1000);
+        var minutes = Math.floor(seconds / 60);
+        var hours = Math.floor(minutes / 60);
+        var days = Math.floor(hours / 24);
+        hours = hours - (days * 24);
+        minutes = minutes - (days * 24 * 60) - (hours * 60);
+        seconds = seconds - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
+        if (days === 0)
+            if (hours === 0)
+                if (minutes === 0 || minutes === 1)
+                    createTime = '1 minute ago' //ngày giờ là 0, phút là 0 hoặc 1
+                else
+                    createTime = minutes + ' minutes ago' //ngày giờ là 0, phút lớn hơn 1
+            else
+                if (hours === 1)
+                    createTime = '1 hour ago' //ngày là 0, giờ là 1
+                else
+                    createTime = hours + ' hours ago' //ngày là 0, giờ lớn hơn 1
+        else
+            if (days === 1)
+                createTime = '1 day ago' //ngày bằng 1
+            else
+                createTime = days + ' days ago' //ngày lớn hơn 1
         if (tweet.operation === 'create_account') {
             return (
-                <div className="flex border-b border-solid border-grey-light">
+                <div className="flex border-b border-solid border-grey-light" key={i}>
                     <div className="w-1/8 text-right pl-3 pt-3">
                         <div><span >{this.renderAvatar(tweet.creatorAvatar, "rounded-full h-12 w-12 mr-2")}</span></div>
                     </div>
@@ -32,8 +70,8 @@ class Home extends Component {
                             <div>
                                 <span className="font-bold"><span className="text-black"><h4 className="font-bold">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}</h4></span></span>
                                 <span className="text-grey-dark"></span>
-                                {/* <span className="text-grey-dark">&middot;</span> */}
-                                <span className="text-grey-dark">{(new Date(tweet.createAt)).toString()}</span>
+                                <span className="text-grey-dark">&middot;</span>
+                                <span className="text-grey-dark">{createTime}</span>
                             </div>
                         </div>
                         <div>
@@ -55,7 +93,7 @@ class Home extends Component {
         }
         else if (tweet.operation === 'payment') {
             return (
-                <div className="flex border-b border-solid border-grey-light">
+                <div className="flex border-b border-solid border-grey-light" key={i}>
                     <div className="w-1/8 text-right pl-3 pt-3">
                         <div><span>{this.renderAvatar(tweet.creatorAvatar, "rounded-full h-12 w-12 mr-2")}</span></div>
                     </div>
@@ -64,8 +102,8 @@ class Home extends Component {
                             <div>
                                 <span className="font-bold"><span className="text-black"><h4 className="font-bold">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}</h4></span></span>
                                 <span className="text-grey-dark"></span>
-                                {/* <span className="text-grey-dark">&middot;</span> */}
-                                <span className="text-grey-dark">{(new Date(tweet.createAt)).toString()}</span>
+                                <span className="text-grey-dark">&middot;</span>
+                                <span className="text-grey-dark">{createTime}</span>
                             </div>
                         </div>
                         <div>
@@ -85,7 +123,7 @@ class Home extends Component {
         }
         else if (tweet.operation === 'update_account') {
             if (tweet.param.key === 'name') {
-                return (<div className="flex border-b border-solid border-grey-light">
+                return (<div className="flex border-b border-solid border-grey-light" key={i}>
                     <div className="w-1/8 text-right pl-3 pt-3">
                         <div><span >{this.renderAvatar(tweet.creatorAvatar, "rounded-full h-12 w-12 mr-2")}</span></div>
                     </div>
@@ -94,8 +132,8 @@ class Home extends Component {
                             <div>
                                 <span className="font-bold"><span className="text-black"><h4 className="font-bold">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}</h4></span></span>
                                 <span className="text-grey-dark"></span>
-                                {/* <span className="text-grey-dark">&middot;</span> */}
-                                <span className="text-grey-dark">{(new Date(tweet.createAt)).toString()}</span>
+                                <span className="text-grey-dark">&middot;</span>
+                                <span className="text-grey-dark">{createTime}</span>
                             </div>
                         </div>
                         <div>
@@ -115,7 +153,7 @@ class Home extends Component {
                 </div>)
             }
             else if (tweet.param.key === 'picture') {
-                return (<div className="flex border-b border-solid border-grey-light">
+                return (<div className="flex border-b border-solid border-grey-light" key={i}>
                     <div className="w-1/8 text-right pl-3 pt-3">
                         <div><span >{this.renderAvatar(tweet.creatorAvatar, "rounded-full h-12 w-12 mr-2")}</span></div>
                     </div>
@@ -124,8 +162,8 @@ class Home extends Component {
                             <div>
                                 <span className="font-bold"><span className="text-black"><h4 className="font-bold">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}</h4></span></span>
                                 <span className="text-grey-dark"></span>
-                                {/* <span className="text-grey-dark">&middot;</span> */}
-                                <span className="text-grey-dark">{(new Date(tweet.createAt)).toString()}</span>
+                                <span className="text-grey-dark">&middot;</span>
+                                <span className="text-grey-dark">{createTime}</span>
                             </div>
                         </div>
                         <div>
@@ -142,11 +180,46 @@ class Home extends Component {
                 </div>)
             }
             else if (tweet.param.key === 'followings') {
-
+                var follow = '';
+                tweet.param.value.map(acc => {
+                    follow = follow + acc.name == null ? (' ' + acc.id) : (' ' + acc.name)
+                })
+                follow = follow.slice(0, -1);
+                return (<div className="flex border-b border-solid border-grey-light" key={i}>
+                    <div className="w-1/8 text-right pl-3 pt-3">
+                        <div><span >{this.renderAvatar(tweet.creatorAvatar, "rounded-full h-12 w-12 mr-2")}</span></div>
+                    </div>
+                    <div className="w-7/8 p-3 pl-0">
+                        <div className="flex justify-between">
+                            <div>
+                                <span className="font-bold"><span className="text-black"><h4 className="font-bold">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}</h4></span></span>
+                                <span className="text-grey-dark"></span>
+                                <span className="text-grey-dark">&middot;</span>
+                                <span className="text-grey-dark">{createTime}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="mb-4">
+                                <p className="mb-6 ">Followed {tweet.param.value.map((acc, i) => {
+                                    if (i === tweet.param.value.length) {
+                                        return (<span key={i} className="text-teal">{acc.name == null ? acc.id : acc.name}</span>)
+                                    }
+                                    else
+                                        return (<span key={i}><span className="text-teal">{acc.name == null ? acc.id : acc.name}</span><span>, </span></span>)
+                                })}</p>
+                                {/* <p><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_tweet1.jpg" alt="tweet image" className="border border-solid border-grey-light rounded-sm" /></p> */}
+                            </div>
+                        </div>
+                        <div className="pb-2">
+                            <span className="mr-4"><span className="text-grey-dark hover:no-underline hover:text-blue-light"><i className="fa fa-comment fa-lg mr-2"></i> 0</span></span>
+                            <span className="mr-4"><span className="text-grey-dark hover:no-underline hover:text-red"><i className="fa fa-heart fa-lg mr-2"></i> 0</span></span>
+                        </div>
+                    </div>
+                </div>)
             }
         }
         else if (tweet.operation === 'post') {
-            return (<div className="flex border-b border-solid border-grey-light">
+            return (<div className="flex border-b border-solid border-grey-light" key={i}>
                 <div className="w-1/8 text-right pl-3 pt-3">
                     <div><span >{this.renderAvatar(tweet.creatorAvatar, "rounded-full h-12 w-12 mr-2")}</span></div>
                 </div>
@@ -155,8 +228,8 @@ class Home extends Component {
                         <div>
                             <span className="font-bold"><span className="text-black"><h4 className="font-bold">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}</h4></span></span>
                             <span className="text-grey-dark"></span>
-                            {/* <span className="text-grey-dark">&middot;</span> */}
-                            <span className="text-grey-dark">{(new Date(tweet.createAt)).toString()}</span>
+                            <span className="text-grey-dark">&middot;</span>
+                            <span className="text-grey-dark">{createTime}</span>
                         </div>
                     </div>
                     <div>
@@ -207,162 +280,11 @@ class Home extends Component {
                 <div className="text-black mr-6 no-underline hover-underline"><h2>Tweets</h2></div>
                 {/* hiển thị các tweets */}
                 {/* {this.state.renderTweets} */}
-                {this.props.tweetsHome.map(tweet => {
-                    return this.render_a_tweet(tweet)
+                {this.props.tweetsHome.map((tweet, i) => {
+                    return this.render_a_tweet(tweet, i)
                 })}
-                <div className="flex border-b border-solid border-grey-light">
-                    <div className="w-1/8 text-right pl-3 pt-3">
-                        <div><i className="fa fa-thumb-tack text-teal mr-2"></i></div>
-                        <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_tailwind.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
-                    </div>
-                    <div className="w-7/8 p-3 pl-0">
-                        <div className="text-xs text-grey-dark">Pinned Tweet</div>
-                        <div className="flex justify-between">
-                            <div>
-                                <span className="font-bold"><a href="#" className="text-black">Tailwind CSS</a></span>
-                                <span className="text-grey-dark">@tailwindcss</span>
-                                <span className="text-grey-dark">&middot;</span>
-                                <span className="text-grey-dark">15 Dec 2017</span>
-                            </div>
-                            <div>
-                                <a href="#" className="text-grey-dark hover:text-teal"><i className="fa fa-chevron-down"></i></a>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div className="mb-4">
-                                <p className="mb-6">🎉 Tailwind CSS v0.4.0 is out!</p>
-                                <p className="mb-6">Makes `apply` more useful when using !important utilities, and includes an improved default color palette:</p>
-                                <p className="mb-4"><a href="#" className="text-teal">github.com/tailwindcss/ta...</a></p>
-                                <p><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_tweet1.jpg" alt="tweet image" className="border border-solid border-grey-light rounded-sm" /></a></p>
-                            </div>
-                        </div>
-
-                        <div className="pb-2">
-                            <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-blue-light"><i className="fa fa-comment fa-lg mr-2"></i> 9</a></span>
-                            <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-green"><i className="fa fa-retweet fa-lg mr-2"></i> 29</a></span>
-                            <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-red"><i className="fa fa-heart fa-lg mr-2"></i> 135</a></span>
-                            <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-teal"><i className="fa fa-envelope fa-lg mr-2"></i></a></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="flex border-b border-solid border-grey-light">
-                    <div className="w-1/8 text-right pl-3 pt-3">
-                        <div><i className="fa fa-retweet text-grey-dark mr-2"></i></div>
-                        <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_adam.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
-                    </div>
-
-                    <div className="w-7/8 p-3 pl-0">
-                        <div className="text-xs text-grey-dark">Tailwind CSS Retweeted</div>
-                        <div className="flex justify-between">
-                            <div>
-                                <span className="font-bold"><a href="#" className="text-black">Adam Wathan</a></span>
-                                <span className="text-grey-dark">@adamwathan</span>
-                                <span className="text-grey-dark">&middot;</span>
-                                <span className="text-grey-dark">7 Dec 2017</span>
-                            </div>
-                            <div>
-                                <a href="#" className="text-grey-dark hover:text-teal"><i className="fa fa-chevron-down"></i></a>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="mb-4">
-                                <p className="mb-6">💥 Check out this Slack clone built with <a href="#" className="text-teal">@tailwindcss</a> using no custom CSS and just the default configuration:</p>
-                                <p className="mb-4"><a href="#" className="text-teal">https://codepen.io/adamwathan/pen/JOQWVa...</a></p>
-                                <p className="mb-6">(based on some work <a href="#" className="text-teal">@Killgt</a> started for <a href="#" className="text-teal">tailwindcomponents.com</a> !)</p>
-                                <p><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_tweet2.jpg" alt="tweet image" className="border border-solid border-grey-light rounded-sm" /></a></p>
-                            </div>
-                            <div className="pb-2">
-                                <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-blue-light"><i className="fa fa-comment fa-lg mr-2"></i> 19</a></span>
-                                <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-green"><i className="fa fa-retweet fa-lg mr-2"></i> 56</a></span>
-                                <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-red"><i className="fa fa-heart fa-lg mr-2"></i> 247</a></span>
-                                <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-teal"><i className="fa fa-envelope fa-lg mr-2"></i></a></span>
-                            </div>
-
-                            <div><a href="#" className="text-teal">Show this thread</a></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="flex border-b border-solid border-grey-light">
-                    <div className="w-1/8 text-right pl-3 pt-3">
-                        <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_tailwind.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
-                    </div>
-
-                    <div className="w-7/8 p-3 pl-0">
-                        <div className="flex justify-between">
-                            <div>
-                                <span className="font-bold"><a href="#" className="text-black">Tailwind CSS</a></span>
-                                <span className="text-grey-dark">@tailwindcss</span>
-                                <span className="text-grey-dark">&middot;</span>
-                                <span className="text-grey-dark">1 Dec 2017</span>
-                            </div>
-                            <div>
-                                <a href="#" className="text-grey-dark hover:text-teal"><i className="fa fa-chevron-down"></i></a>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="mb-4">
-                                <p className="mb-6">🎉 Tailwind CSS v0.3.0 is here!</p>
-                                <p className="mb-4">Enable/disable modules, focus and group-hover variants, new utilities, and more.</p>
-                                <p className="mb-4">Learn more in our upgrade guide:</p>
-                                <p className="mb-6"><a href="#" className="text-teal">github.com/tailwind/ta...</a></p>
-                                <p><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_tweet3.jpg" alt="tweet image" className="border border-solid border-grey-light rounded-sm" /></a></p>
-                            </div>
-                            <div className="pb-2">
-                                <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-blue-light"><i className="fa fa-comment fa-lg mr-2"></i> 6</a></span>
-                                <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-green"><i className="fa fa-retweet fa-lg mr-2"></i> 74</a></span>
-                                <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-red"><i className="fa fa-heart fa-lg mr-2"></i> 206</a></span>
-                                <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-teal"><i className="fa fa-envelope fa-lg mr-2"></i></a></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="flex border-b border-solid border-grey-light">
-                    <div className="w-1/8 text-right pl-3 pt-3">
-                        <div><i className="fa fa-retweet text-grey-dark mr-2"></i></div>
-                        <div><a href="#"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_avatar_egghead.jpg" alt="avatar" className="rounded-full h-12 w-12 mr-2" /></a></div>
-                    </div>
-
-                    <div className="w-7/8 p-3 pl-0">
-                        <div className="text-xs text-grey-dark">Tailwind CSS Retweeted</div>
-                        <div className="flex justify-between">
-                            <div>
-                                <span className="font-bold"><a href="#" className="text-black">egghead.io</a></span>
-                                <span className="text-grey-dark">@eggheadio</span>
-                                <span className="text-grey-dark">&middot;</span>
-                                <span className="text-grey-dark">29 Nov 2017</span>
-                            </div>
-                            <div>
-                                <a href="#" className="text-grey-dark hover:text-teal"><i className="fa fa-chevron-down"></i></a>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="mb-4">
-                                <p className="mb-6">Create a Responsive Card Component by Composing Tailwind's Utility classNamees - <a href="#" className="text-teal">#html</a> lesson by <a href="#" className="text-teal">@simonswiss</a></p>
-                                <div className="flex border border-solid border-grey rounded">
-                                    <div className="w-1/4">
-                                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_tweet4.jpg" alt="image" />
-                                    </div>
-                                    <div className="w-3/4 p-3">
-                                        <div className="font-bold mb-1">egghead Lesson: Abstract utility classNamees to ...</div>
-                                        <p className="mb-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus voluptate tempore itaque culpa hic qui nostrum, minus harum cupiditate a voluptatibus.</p>
-                                        <div className="text-grey-dark">egghead.io</div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div className="pb-2">
-                                <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-blue-light"><i className="fa fa-comment fa-lg mr-2"></i> 2</a></span>
-                                <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-green"><i className="fa fa-retweet fa-lg mr-2"></i> 8</a></span>
-                                <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-red"><i className="fa fa-heart fa-lg mr-2"></i> 24</a></span>
-                                <span className="mr-8"><a href="#" className="text-grey-dark hover:no-underline hover:text-teal"><i className="fa fa-envelope fa-lg mr-2"></i></a></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {this.props.loadingState ? <p className="loading"> <hr></hr>Loading ...</p> : ""}
+                {this.props.nothingToLoad ? <p className="loading"> <hr></hr>Nothing to load</p> : ""}
             </div>
         );
     }

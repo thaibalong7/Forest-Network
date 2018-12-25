@@ -24,10 +24,10 @@ class HomeContainer extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			loadingState: false,
+			loadingState: true,
 			page: 1,
 			nothingToLoad: false,
-			per_page: 5
+			per_page: 2
 		}
 	}
 	componentDidMount = async () => {
@@ -56,10 +56,10 @@ class HomeContainer extends Component {
 						page: rs.data.next_page
 					})
 				})
-			this.setState({ loadingState: true });
+			this.setState({ loadingState: false });
 		}
 		else {
-			this.setState({ nothingToLoad: true });
+			this.setState({ nothingToLoad: false });
 		}
 	}
 	add_tweets = async (data) => { //data là dữ liệu của các transaction có liên quan được trả về qua api
@@ -184,16 +184,17 @@ class HomeContainer extends Component {
 				loadingState: true,
 			});
 			await axios.get(API_server + 'transactions/getTweetsInHome/' + this.props.userProfileReducer.id + '&5&' + this.state.page)
-				.then(rs => {
-					this.props.loadmore_tweets_home(rs.data.data)
+				.then(async rs => {
+					const list_tweets = await this.add_tweets(rs.data.data);
+					this.props.loadmore_tweets_home(list_tweets)
 					this.setState({
 						page: rs.data.next_page
 					})
 				})
-			this.setState({ loadingState: true });
+			this.setState({ loadingState: false });
 		}
 		else {
-			this.setState({ nothingToLoad: true });
+			this.setState({ nothingToLoad: false });
 		}
 
 	}
@@ -201,7 +202,8 @@ class HomeContainer extends Component {
 		return (
 			<Home flag="home" loadingState={this.state.loadingState}
 				nothingToLoad={this.state.nothingToLoad}
-				tweetsHome={this.props.tweetsHomeReducer}>
+				tweetsHome={this.props.tweetsHomeReducer}
+				loadMore={this.loadMoreTweets}>
 			</Home>
 		);
 	}
