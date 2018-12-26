@@ -129,13 +129,14 @@ class Home extends Component {
                             <div className="mb-4">
                                 <p className="mb-6">
                                     <span className="text-teal hover-people">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}
-                                    </span> sent to 
+                                    </span> sent to
                                     <span
                                         className="text-teal hover-people"
                                         data-target="#modalFollow"
                                         data-toggle="modal"
-                                        // onClick={()=>this.onClickUser()} 
-                                        >{tweet.param.name == null ? tweet.param.address : tweet.param.name}
+                                        data-id={tweet.param.address}
+                                    // onClick={()=>this.onClickUser()} 
+                                    >{tweet.param.name == null ? ' ' + tweet.param.address : ' ' + tweet.param.name}
                                     </span> {tweet.param.amount} CEL
                                 </p>
                                 {/* <p className="mb-6"><Link to="/home/me/123">{tweet.param.value}</Link></p> */}
