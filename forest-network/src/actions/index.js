@@ -10,7 +10,9 @@ import {
     LOAD_FOLLOWING,
     LOAD_FOLLOWER,
     CHANGE_NAME,
-    ADD_NEW_TWEET_HOME
+    ADD_NEW_TWEET_HOME,
+    UPDATE_HISTORICAL_TRANSACTION,
+    LOADMORE_HISTORICAL_TRANSACTION
 } from './types'
 
 export const change_user_info = (user_info) => {
@@ -93,5 +95,19 @@ export const load_follower = (follower) => {
     return {
         type: LOAD_FOLLOWER,
         follower
+    }
+}
+
+export const update_historical_transaction = (list_transaction) =>{
+    return {
+        type: UPDATE_HISTORICAL_TRANSACTION,
+        list_transaction
+    }
+}
+
+export const loadmore_historical_transaction = (list_transaction) =>{
+    return {
+        type: LOADMORE_HISTORICAL_TRANSACTION,
+        list_transaction
     }
 }
