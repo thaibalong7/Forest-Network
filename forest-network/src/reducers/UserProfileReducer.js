@@ -1,5 +1,7 @@
 import {
     CHANGE_USER_INFO,
+    INCREASE_SEQUENCE,
+    CHANGE_NAME
 } from '../actions/types'
 
 import { API_server } from '../config'
@@ -21,6 +23,14 @@ const userProfileReducer = (prevState = initialState, action) => {
         case CHANGE_USER_INFO: {
             const { user_info } = action;
             return user_info;
+        }
+        case INCREASE_SEQUENCE: {
+            const cur_sequence = parseInt(prevState.sequence)
+            return { ...prevState, sequence: cur_sequence + 1 }
+        }
+        case CHANGE_NAME: {
+            const { name } = action;
+            return { ...prevState, name: name }
         }
         default:
             return prevState;

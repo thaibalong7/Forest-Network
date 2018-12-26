@@ -14,6 +14,7 @@ import {
 	decodeUpdateAccount,
 } from '../lib/transaction/v1'
 import base32 from 'base32.js';
+import { increase_sequence } from '../actions'
 async function asyncForEach(arr, cb) {
 	for (let i = 0; i < arr.length; i++) {
 		await cb(arr[i], i);
@@ -203,7 +204,9 @@ class HomeContainer extends Component {
 			<Home flag="home" loadingState={this.state.loadingState}
 				nothingToLoad={this.state.nothingToLoad}
 				tweetsHome={this.props.tweetsHomeReducer}
-				loadMore={this.loadMoreTweets}>
+				loadMore={this.loadMoreTweets}
+				userProfileReducer={this.props.userProfileReducer}
+				increase_sequence={this.props.increase_sequence}>
 			</Home>
 		);
 	}
@@ -216,7 +219,10 @@ const mapDispatchToProps = (dispatch, props) => {
 		},
 		loadmore_tweets_home: (tweets_user) => {
 			dispatch(loadmore_tweets_home(tweets_user));
-		}
+		},
+		increase_sequence: () => {
+			dispatch(increase_sequence());
+		},
 	}
 }
 

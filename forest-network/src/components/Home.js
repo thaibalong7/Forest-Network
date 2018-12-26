@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import '../styles/Home.css';
 import '../index.css';
 import '../styles/status.css';
+import { sentPostTransaction } from '../lib/transaction/sendTransaction'
 
-async function asyncForEach(arr, cb) {
-    for (let i = 0; i < arr.length; i++) {
-        await cb(arr[i], i);
-    }
-}
 class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
             renderTweets: [],
+            content_post: ''
         }
         // Binds our scroll event handler
         window.onscroll = () => {
@@ -20,6 +17,26 @@ class Home extends Component {
                 this.props.loadMore();
             }
         };
+    }
+    ChangePost = (e) => {
+        this.setState({ content_post: e.target.value })
+    }
+    sentPost = () => {
+        sentPostTransaction(this.state.content_post, this.props.userProfileReducer.sequence, rs => {
+            if (typeof rs === 'undefined') {
+                console.log('Fail to post')
+            }
+            else {
+                if (rs.height === '0') {
+                    console.log(rs.check_tx.log)
+                }
+                else {
+                    console.log('Post success')
+                    this.setState({ content_post: '' })
+                    this.props.increase_sequence();
+                }
+            }
+        })
     }
     componentDidMount() {
     }
@@ -78,7 +95,7 @@ class Home extends Component {
                             <div className="mb-4">
                                 <p>
                                     <span className="mb-6">Create new account </span>
-                                    <span className="mb-6 text-teal">{tweet.param.address}</span>
+                                    <span className="mb-6 text-teal hover-people">{tweet.param.address}</span>
                                     {/* <p><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_tweet1.jpg" alt="tweet image" className="border border-solid border-grey-light rounded-sm" /></p> */}
                                 </p>
                             </div>
@@ -108,7 +125,7 @@ class Home extends Component {
                         </div>
                         <div>
                             <div className="mb-4">
-                                <p className="mb-6"><span className="text-teal">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}</span> sent to <span className="text-teal">{tweet.param.name == null ? tweet.param.address : tweet.param.name}</span> {tweet.param.amount} CEL</p>
+                                <p className="mb-6"><span className="text-teal hover-people">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}</span> sent to <span className="text-teal hover-people">{tweet.param.name == null ? tweet.param.address : tweet.param.name}</span> {tweet.param.amount} CEL</p>
                                 {/* <p className="mb-6"><Link to="/home/me/123">{tweet.param.value}</Link></p> */}
                                 {/* <p><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_tweet1.jpg" alt="tweet image" className="border border-solid border-grey-light rounded-sm" /></p> */}
                             </div>
@@ -202,10 +219,10 @@ class Home extends Component {
                             <div className="mb-4">
                                 <p className="mb-6 ">Followed {tweet.param.value.map((acc, i) => {
                                     if (i === tweet.param.value.length) {
-                                        return (<span key={i} className="text-teal">{acc.name == null ? acc.id : acc.name}</span>)
+                                        return (<span key={i} className="text-teal hover-people">{acc.name == null ? acc.id : acc.name}</span>)
                                     }
                                     else
-                                        return (<span key={i}><span className="text-teal">{acc.name == null ? acc.id : acc.name}</span><span>, </span></span>)
+                                        return (<span key={i}><span className="text-teal hover-people">{acc.name == null ? acc.id : acc.name}</span><span>, </span></span>)
                                 })}</p>
                                 {/* <p><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_tweet1.jpg" alt="tweet image" className="border border-solid border-grey-light rounded-sm" /></p> */}
                             </div>
@@ -259,13 +276,15 @@ class Home extends Component {
                                     className="posttweetta"
                                     placeholder="What's happening?"
                                     rows="5"
-                                    cols="50">
+                                    cols="50"
+                                    value={this.state.content_post}
+                                    onChange={this.ChangePost}>
                                 </textarea>
                                 <div className="posttweetcountcont">
                                 </div>
                             </div>
                             <div className="posttweetbutcont">
-                                <button id="posttweetbut" className="posttweetbut">Post</button>
+                                <button id="posttweetbut" className="posttweetbut" onClick={this.sentPost}>Post</button>
                             </div>
                         </div>
                     </div>

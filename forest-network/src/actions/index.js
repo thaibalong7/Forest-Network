@@ -1,18 +1,34 @@
 import {
     CHANGE_USER_INFO,
     UPDATE_TWEETS_USER,
+    INCREASE_SEQUENCE,
     CHANGE_FLAG_PAGE,
     CHANGE_FLAG_ME,
     UPDATE_TWEETS_HOME,
     LOADMORE_TWEETS_HOME,
     LOADMORE_TWEETS_USER,
-    LOAD_FOLLOWING
+    LOAD_FOLLOWING,
+    CHANGE_NAME,
+    ADD_NEW_TWEET_HOME
 } from './types'
 
 export const change_user_info = (user_info) => {
     return {
         type: CHANGE_USER_INFO,
         user_info
+    }
+}
+
+export const increase_sequence = () => {
+    return {
+        type: INCREASE_SEQUENCE,
+    }
+}
+
+export const change_name = (name) => {
+    return {
+        type: CHANGE_NAME,
+        name
     }
 }
 
@@ -41,6 +57,13 @@ export const loadmore_tweets_home = (tweets_home) => {
     return {
         type: LOADMORE_TWEETS_HOME,
         tweets_home
+    }
+}
+
+export const add_new_tweet = (new_tweet) => {
+    return {
+        type: ADD_NEW_TWEET_HOME,
+        new_tweet
     }
 }
 
