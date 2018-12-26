@@ -110,35 +110,34 @@ class NavigationBar extends Component {
                     <div className="container mx-auto flex flex-col lg:flex-row items-center lg:relative">
                         <div className="photoContainer">
                             <div className="_1ro1 _5ycb drop_elem" id="u_0_1f">
-                                <span className="_1nv3 _11kg profilePicThumb">
+                                <a className="_1nv3 _11kg profilePicThumb">
                                     <div className="w-full lg:w-1/5">
                                         {this.renderAvatar("rounded-full h-48 w-48 lg:absolute lg:pin-l lg:pin-t lg:-mt-24")}
                                     </div>
-                                </span>
+                                </a>
                                 <div className="_156n _23fw" >
                                     <span className="_156p _1o5e">
-                                        <span id="photo-choose-existing" className="photo-choose-existing upload-photo" role="presentation">
+                                        <li id="photo-choose-existing" className="photo-choose-existing upload-photo" role="presentation">
                                             <div className="photo-selector">
                                                 <button className="btn styleinput" type="button">
                                                     Change photo
 									            </button>
-                                                {/* <span className="photo-file-name">No file selected</span> */}
                                                 <div className="image-selector">
-                                                    {/* <input type="hidden" name="media_file_name" className="file-name"/>
-										<input type="hidden" name="media_data_empty" className="file-data"/> */}
+                                                    <input type="hidden" name="media_file_name" className="file-name"/>
+									 	            <input type="hidden" name="media_data_empty" className="file-data"/>
                                                     <input type="file" name="media[]" className="file-input"
                                                         tabIndex="-1" title="Add Photo" accept="image/gif,image/jpeg,image/jpg,image/png"
                                                         onChange={e => { this.changeImage(e) }}
                                                     />
                                                 </div>
                                             </div>
-                                        </span>
-                                        {/* <li id="photo-choose-webcam" className="u-hidden" role="presentation">
+                                        </li>
+                                        <li id="photo-choose-webcam" className="u-hidden" role="presentation">
 								<button type="button" className="dropdown-link">Take photo</button>
 							</li>
 							<li id="photo-delete-image" className="u-hidden" role="presentation">
 							<button type="button" className="dropdown-link">Remove</button>
-								</li> */}
+								</li>
                                     </span>
                                 </div>
                             </div>
