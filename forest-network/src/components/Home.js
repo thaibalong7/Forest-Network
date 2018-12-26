@@ -4,6 +4,7 @@ import '../index.css';
 import '../styles/status.css';
 import { sentPostTransaction } from '../lib/transaction/sendTransaction'
 
+
 class Home extends Component {
     constructor(props) {
         super(props)
@@ -49,6 +50,7 @@ class Home extends Component {
             return (<img src="images/default-avatar.jpg" alt="avatar" className={_className} />)
         }
     }
+
     render_a_tweet = (tweet, i) => {
         var createTime;
         const lastSignInTime = new Date(tweet.createAt);
@@ -125,7 +127,17 @@ class Home extends Component {
                         </div>
                         <div>
                             <div className="mb-4">
-                                <p className="mb-6"><span className="text-teal hover-people">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}</span> sent to <span className="text-teal hover-people">{tweet.param.name == null ? tweet.param.address : tweet.param.name}</span> {tweet.param.amount} CEL</p>
+                                <p className="mb-6">
+                                    <span className="text-teal hover-people">{tweet.creatorName == null ? tweet.creatorId : tweet.creatorName}
+                                    </span> sent to 
+                                    <span
+                                        className="text-teal hover-people"
+                                        data-target="#modalFollow"
+                                        data-toggle="modal"
+                                        // onClick={()=>this.onClickUser()} 
+                                        >{tweet.param.name == null ? tweet.param.address : tweet.param.name}
+                                    </span> {tweet.param.amount} CEL
+                                </p>
                                 {/* <p className="mb-6"><Link to="/home/me/123">{tweet.param.value}</Link></p> */}
                                 {/* <p><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/tt_tweet1.jpg" alt="tweet image" className="border border-solid border-grey-light rounded-sm" /></p> */}
                             </div>
