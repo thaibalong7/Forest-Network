@@ -99,7 +99,7 @@ class NavigationBar extends Component {
 									<div className="image-selector">
 										<input type="hidden" name="media_file_name" className="file-name"/>
 										<input type="hidden" name="media_data_empty" className="file-data"/>
-										<input type="file" name="media[]" className="file-input" tabindex="-1" title="Add Photo" accept="image/gif,image/jpeg,image/jpg,image/png"/>
+										<input type="file" name="media[]" className="file-input" tabIndex="-1" title="Add Photo" accept="image/gif,image/jpeg,image/jpg,image/png"/>
 									</div>
 								</div>
 							</li>
