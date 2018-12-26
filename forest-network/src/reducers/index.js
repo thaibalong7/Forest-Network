@@ -6,6 +6,7 @@ import flagPageReducer from './flagReducer';
 import flagMeReducer from './flagMeReducer';
 import followingReducer from './followingReducer';
 import followerReducer from './followerReducer';
+import historicalTransactionReducer from './HistoricalTransactionReducer'
 
 export default combineReducers({
     userProfileReducer: userProfileReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
     flagMeReducer: flagMeReducer,
     tweetsHomeReducer: tweetsHomeReducer,
     followingReducer: followingReducer,
-    followerReducer: followerReducer
+    followerReducer: followerReducer,
+    historicalTransactionReducer: historicalTransactionReducer,
 });

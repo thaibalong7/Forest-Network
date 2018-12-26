@@ -3,8 +3,8 @@ import '../../styles/Home.css';
 import '../../index.css';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
-import { change_flag_page, change_flag_me } from "../../actions/index";
-
+import { change_flag_page, change_flag_me, increase_sequence } from "../../actions";
+import { sentUpdatePictureTransaction } from '../../lib/transaction/sendTransaction';
 class NavigationBar extends Component {
     onChangeFlagPage(event) {
         console.log(event);
@@ -32,15 +32,42 @@ class NavigationBar extends Component {
     onChangeFlagMe(event) {
         this.props.change_flag_me(event);
     }
-
+    changeImage(e) {
+        if (e.target.files.length !== 0) {
+            const file = e.target.files[0];
+            const fileReader = new FileReader();
+            fileReader.readAsText(file);
+            fileReader.onloadend = () => {
+                console.log(Buffer.from(fileReader.result))
+                var buffer = new ArrayBuffer(fileReader.result.length);
+                console.log(fileReader.result.length)
+                Buffer.from(fileReader.result).map(function(value, i){buffer[i] = value});
+                console.log(buffer);
+                // sentUpdatePictureTransaction(Buffer.from(fileReader.result), this.props.userProfileReducer.sequence, (rs) => {
+                //     if (typeof rs === 'undefined') {
+                //         console.log('Fail to update avatar')
+                //     }
+                //     else {
+                //         if (rs.height === '0') {
+                //             console.log(rs.check_tx.log)
+                //         }
+                //         else {
+                //             console.log('Update avatar success')
+                //             this.props.increase_sequence();
+                //         }
+                //     }
+                // })
+            }
+        }
+    }
     render() {
         // console.log("Naviiiiiii");
         // console.log(this.props.location.pathname);
-        if(this.props.location.pathname === "/home" || this.props.location.pathname === "/home/"){
+        if (this.props.location.pathname === "/home" || this.props.location.pathname === "/home/") {
             // console.log("CHange to flag HOME, please");
             this.props.change_flag_page("home");
         }
-        else if(this.props.location.pathname === "/home/me" || this.props.location.pathname === "/home/me/"){
+        else if (this.props.location.pathname === "/home/me" || this.props.location.pathname === "/home/me/") {
             // console.log("CHange to flag ME, please");
             this.props.change_flag_page("me");
         }
@@ -81,38 +108,40 @@ class NavigationBar extends Component {
                 <div className="hero h-64 bg-cover h-60"></div>
                 <div className="bg-white shadow">
                     <div className="container mx-auto flex flex-col lg:flex-row items-center lg:relative">
-                    <div className="photoContainer">
-				        <div className="_1ro1 _5ycb drop_elem" id="u_0_1f">
-					        <a className="_1nv3 _11kg profilePicThumb">
-                                <div className="w-full lg:w-1/5">
-                                    {this.renderAvatar("rounded-full h-48 w-48 lg:absolute lg:pin-l lg:pin-t lg:-mt-24")}
-                                </div>
-                            </a>
-                            <div className="_156n _23fw" >
-						<a href="#" className="_156p _1o5e">
-							<li id="photo-choose-existing" className="photo-choose-existing upload-photo" role="presentation">
-								<div className="photo-selector">
-									<button className="btn styleinput" type="button">
-										Change photo
-									</button>
-								 	<span className="photo-file-name">No file selected</span>
-									<div className="image-selector">
-										<input type="hidden" name="media_file_name" className="file-name"/>
-										<input type="hidden" name="media_data_empty" className="file-data"/>
-										<input type="file" name="media[]" className="file-input" tabIndex="-1" title="Add Photo" accept="image/gif,image/jpeg,image/jpg,image/png"/>
-									</div>
-								</div>
-							</li>
-							<li id="photo-choose-webcam" className="u-hidden" role="presentation">
+                        <div className="photoContainer">
+                            <div className="_1ro1 _5ycb drop_elem" id="u_0_1f">
+                                <a className="_1nv3 _11kg profilePicThumb">
+                                    <div className="w-full lg:w-1/5">
+                                        {this.renderAvatar("rounded-full h-48 w-48 lg:absolute lg:pin-l lg:pin-t lg:-mt-24")}
+                                    </div>
+                                </a>
+                                <div className="_156n _23fw" >
+                                    <span className="_156p _1o5e">
+                                        <li id="photo-choose-existing" className="photo-choose-existing upload-photo" role="presentation">
+                                            <div className="photo-selector">
+                                                <button className="btn styleinput" type="button">
+                                                    Change photo
+									            </button>
+                                                <div className="image-selector">
+                                                    <input type="hidden" name="media_file_name" className="file-name"/>
+									 	            <input type="hidden" name="media_data_empty" className="file-data"/>
+                                                    <input type="file" name="media[]" className="file-input"
+                                                        tabIndex="-1" title="Add Photo" accept="image/gif,image/jpeg,image/jpg,image/png"
+                                                        onChange={e => { this.changeImage(e) }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li id="photo-choose-webcam" className="u-hidden" role="presentation">
 								<button type="button" className="dropdown-link">Take photo</button>
 							</li>
 							<li id="photo-delete-image" className="u-hidden" role="presentation">
 							<button type="button" className="dropdown-link">Remove</button>
 								</li>
-						</a>
-					    </div>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
                         {
                             this.props.flagPage === "me" ?
                                 <div className="w-full lg:w-1/1 subNavi">
@@ -159,7 +188,10 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         change_flag_me: (event) => {
             dispatch(change_flag_me(event));
-        }
+        },
+        increase_sequence: () => {
+            dispatch(increase_sequence());
+        },
     }
 }
 
