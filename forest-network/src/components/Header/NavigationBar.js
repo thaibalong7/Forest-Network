@@ -4,6 +4,7 @@ import '../../index.css';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
 import { change_flag_page, change_flag_me } from "../../actions/index";
+
 class NavigationBar extends Component {
     onChangeFlagPage(event) {
         console.log(event);
@@ -33,20 +34,30 @@ class NavigationBar extends Component {
     }
 
     render() {
+        // console.log("Naviiiiiii");
+        // console.log(this.props.location.pathname);
+        if(this.props.location.pathname === "/home" || this.props.location.pathname === "/home/"){
+            // console.log("CHange to flag HOME, please");
+            this.props.change_flag_page("home");
+        }
+        else if(this.props.location.pathname === "/home/me" || this.props.location.pathname === "/home/me/"){
+            // console.log("CHange to flag ME, please");
+            this.props.change_flag_page("me");
+        }
         var componentSelected = "text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal border-teal no-underline";
         var componentUnselected = "text-grey-darker text-sm mr-4 font-semibold pb-6 border-b-2 border-solid border-transparent no-underline hover:text-teal hover:border-teal hover:no-underline";
-        var homeStyles, notiStyles, meStyles;
+        var homeStyles, meStyles;
         console.log("----------------");
         console.log(this.props.flagPage);
         if (this.props.flagPage === "me") {
             console.log("Here me");
             meStyles = componentSelected;
-            notiStyles = homeStyles = componentUnselected;
+            homeStyles = componentUnselected;
         }
         else {
             console.log("Here home");
             homeStyles = componentSelected;
-            notiStyles = meStyles = componentUnselected;
+            meStyles = componentUnselected;
         }
 
         return (
@@ -104,7 +115,7 @@ class NavigationBar extends Component {
                     </div>
                         {
                             this.props.flagPage === "me" ?
-                                <div className="w-full lg:w-1/1">
+                                <div className="w-full lg:w-1/1 subNavi">
                                     <ul className="list-reset flex">
                                         <li className="text-center py-3 px-2 border-b-2 border-solid border-transparent">
                                             <button onClick={() => this.onChangeFlagMe("me")} className="text-grey-darker no-underline hover:no-underline">

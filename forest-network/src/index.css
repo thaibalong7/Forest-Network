@@ -488,6 +488,10 @@ table {
   border-collapse: collapse;
 }
 
+.hover-people {
+  cursor: pointer;
+}
+
 .list-reset {
   list-style: none;
   padding: 0;
