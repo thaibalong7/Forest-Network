@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../styles/Home.css';
 import '../index.css';
 import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
-
+import {Error} from "./Error";
 
 class Login extends Component {
     constructor(props) {
@@ -38,21 +38,30 @@ class Login extends Component {
                                 Member Login
                             </span>
                             <div className="wrap-input100 validate-input" >
-                                <input className="input100"
+                                <input required="required"
+                                    className="input100"
                                     type="text"
-                                    name="secret_key" id="secret_key" 
+                                    name="secret_key" 
+                                    id="secret_key" 
                                     placeholder="Enter secret key"
                                     value={this.state.secret_key}
                                     onChange={this.onChangeSecretKey}
                                     onKeyPress={this.handleKeyPress}
+                                    
                                 />
                                 <span className="focus-input100"></span>
                                 <span className="symbol-input100">
                                     <i className="fa fa-lock" aria-hidden="true"></i>
                                 </span>
+                                {
+                                    this.state.secret_key !== ""?
+                                    Error("ssssss"):null
+                                }
                             </div>
                             <div className="container-login100-form-btn">
-                                <button className="login100-form-btn" onClick={() => this.props.login(this.state.secret_key)}>
+                                <button 
+                                    className="login100-form-btn" 
+                                    onClick={() => this.props.login(this.state.secret_key)}>
                                     Login
                                 </button>
                             </div>
