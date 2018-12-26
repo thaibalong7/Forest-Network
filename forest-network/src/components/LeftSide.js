@@ -81,6 +81,15 @@ class LeftSide extends Component {
             }
         })
     }
+
+    onClickFollowNo = () => {
+        console.log("Nooooo");
+    }
+
+    onClickFollowYes = () => {
+        console.log("Yes");
+    }
+
     render() {
         var Balance = "Balance: " + this.props.userProfileReducer.balance;
         var Sequence = "Sequence: " + this.props.userProfileReducer.sequence;
@@ -197,6 +206,28 @@ class LeftSide extends Component {
                         </div>
                     </div>
 
+                    <div className="modal fade"
+                        id="modalFollow"
+                        data-backdrop="true"
+                        data-keyboard="true"
+                        tabIndex="-1"
+                        aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h4 className="modal-title">Do you want to follow this user??</h4>
+                                    <button type="button" className="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div className="modal-footer">
+                                    <button onClick={() => this.onClickFollowNo()} className="login100-form-btn followNo" data-dismiss="modal">No</button>
+                        
+                                    <button onClick={() => this.onClickFollowYes()} className="login100-form-btn followYes" data-dismiss="modal">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
                     <div className="modal fade"
                         id="myModal"
                         data-backdrop="true"
