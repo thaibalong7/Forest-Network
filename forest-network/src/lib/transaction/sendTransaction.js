@@ -49,7 +49,10 @@ export function sentCreateAccountTransaction(account, sequence, cb) {
             }
         })
     } catch (e) {
-        cb({ check_tx: { log: 'Error: Cannot create transaction' } })
+        cb({
+            check_tx: { log: 'Error: Cannot create transaction', },
+            height: '0'
+        })
     }
 }
 
@@ -78,7 +81,10 @@ export function sentUpdateNameTransaction(name, sequence, cb) {
             }
         })
     } catch (e) {
-        cb({ check_tx: { log: 'Error: Cannot create transaction' } })
+        cb({
+            check_tx: { log: 'Error: Cannot create transaction', },
+            height: '0'
+        })
     }
 }
 
@@ -112,7 +118,10 @@ export function sentUpdatePictureTransaction(data, sequence, cb) {
             }
         })
     } catch (e) {
-        cb({ check_tx: { log: 'Error: Cannot create transaction' } })
+        cb({
+            check_tx: { log: 'Error: Cannot create transaction', },
+            height: '0'
+        })
     }
 }
 
@@ -144,7 +153,10 @@ export function sentUpdateFollowingsTransaction(addresses, sequence, cb) {
             }
         })
     } catch (e) {
-        cb({ check_tx: { log: 'Error: Cannot create transaction' } })
+        cb({
+            check_tx: { log: 'Error: Cannot create transaction', },
+            height: '0'
+        })
     }
 }
 
@@ -177,7 +189,10 @@ export function sentPostTransaction(text, sequence, cb) {
             }
         })
     } catch (e) {
-        cb({ check_tx: { log: 'Error: Cannot create transaction' } })
+        cb({
+            check_tx: { log: 'Error: Cannot create transaction', },
+            height: '0'
+        })
     }
 }
 
@@ -206,6 +221,9 @@ export function sendPaymentTransaction(accountToSent, amount, sequence, cb) {
             }
         })
     } catch (e) {
-        cb({ check_tx: { log: 'Error: Cannot create transaction' } })
+        cb({
+            check_tx: { log: 'Error: Cannot create transaction', },
+            height: '0'
+        })
     }
 }

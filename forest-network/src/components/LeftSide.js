@@ -4,7 +4,7 @@ import '../index.css'
 import '../styles/style.css'
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import { sentUpdateNameTransaction, sendPaymentTransaction } from '../lib/transaction/sendTransaction';
+import { sentUpdateNameTransaction, sendPaymentTransaction, sentCreateAccountTransaction } from '../lib/transaction/sendTransaction';
 import { increase_sequence, change_name } from '../actions';
 class LeftSide extends Component {
     constructor(props) {
@@ -12,7 +12,8 @@ class LeftSide extends Component {
         this.state = {
             nameToChange: props.userProfileReducer.name,
             amountToSent: 0,
-            accountToSent: ''
+            accountToSent: '',
+            accountToCreate: ''
         }
     }
     componentDidUpdate(prevProps) {
@@ -61,6 +62,25 @@ class LeftSide extends Component {
             }
         })
     }
+    CreateAccount = () => {
+        sentCreateAccountTransaction(this.state.accountToCreate, this.props.userProfileReducer.sequence, rs => {
+            if (typeof rs === 'undefined') {
+                console.log('Fail to create')
+            }
+            else {
+                if (rs.height === '0') {
+                    console.log(rs.check_tx.log)
+                }
+                else {
+                    console.log('Create new account success')
+                    this.setState({
+                        accountToCreate: ''
+                    })
+                    this.props.increase_sequence()
+                }
+            }
+        })
+    }
     render() {
         var Balance = "Balance: " + this.props.userProfileReducer.balance;
         var Sequence = "Sequence: " + this.props.userProfileReducer.sequence;
@@ -97,6 +117,13 @@ class LeftSide extends Component {
                         data-toggle="modal"
                         data-target="#myModal">Add Transaction
                     </button>
+
+                    <button
+                        type="button"
+                        className="bg-teal hover:bg-teal-dark text-white font-medium py-2 px-4 rounded-full"
+                        data-toggle="modal"
+                        data-target="#modalCreateAccount">Create Account
+                    </button>
                     {/* <!-- The Modal --> */}
 
                     <div className="modal fade"
@@ -132,6 +159,44 @@ class LeftSide extends Component {
                             </div>
                         </div>
                     </div>
+
+                    <div className="modal fade"
+                        id="modalCreateAccount"
+                        data-backdrop="true"
+                        data-keyboard="true"
+                        tabIndex="1"
+                        aria-labelledby="myModalLabel"
+                        aria-hidden="true"
+                    >
+                        <div className="modal-dialog position">
+                            <div className="modal-content">
+
+                                <div className="modal-header">
+                                    <h4 className="modal-title">Create Account</h4>
+                                    <button type="button" className="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <div className="modal-body">
+                                    <form>
+                                        <div>
+                                            <h3>Public Key: </h3>
+                                            <input
+                                                type="text"
+                                                className="bg-grey-lighter h-8 px-4 py-2 text-xs w-48 rounded-full"
+                                                value={this.state.accountToCreate}
+                                                onChange={e => { this.setState({ accountToCreate: e.target.value }) }}
+                                            />
+                                        </div>
+                                        <div>
+                                            <span>Please input public key to create</span>
+                                        </div>
+                                        <button className="style" data-dismiss="modal" onClick={this.CreateAccount}>Create</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="modal fade"
                         id="myModal"
                         data-backdrop="true"
@@ -165,9 +230,6 @@ class LeftSide extends Component {
                                             <input type="number" value={this.state.amountToSent}
                                                 className="bg-grey-lighter h-8 px-4 py-2 text-xs w-48 rounded-full"
                                                 onChange={event => this.setState({ amountToSent: event.target.value.replace(/\D/, '') })} />
-                                        </div>
-                                        <div>
-                                            <span>Please type correct amount.</span>
                                         </div>
                                         <button className="btn btn-sucess" data-dismiss="modal" onClick={this.SentAmount}>SUBMIT</button>
                                     </form>
