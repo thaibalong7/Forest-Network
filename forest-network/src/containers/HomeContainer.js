@@ -184,7 +184,7 @@ class HomeContainer extends Component {
 			this.setState({
 				loadingState: true,
 			});
-			await axios.get(API_server + 'transactions/getTweetsInHome/' + this.props.userProfileReducer.id + '&5&' + this.state.page)
+			await axios.get(API_server + 'transactions/getTweetsInHome/' + this.props.userProfileReducer.id + '&' + this.state.per_page + '&' + this.state.page)
 				.then(async rs => {
 					const list_tweets = await this.add_tweets(rs.data.data);
 					this.props.loadmore_tweets_home(list_tweets)
