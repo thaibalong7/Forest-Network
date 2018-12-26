@@ -34,7 +34,6 @@ class FollowingContainer extends Component {
 				sessionStorage.clear();	
 			})
 		}
-		
 	}
 
 	render() {

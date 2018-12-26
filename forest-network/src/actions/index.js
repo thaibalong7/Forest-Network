@@ -6,7 +6,8 @@ import {
     UPDATE_TWEETS_HOME,
     LOADMORE_TWEETS_HOME,
     LOADMORE_TWEETS_USER,
-    LOAD_FOLLOWING
+    LOAD_FOLLOWING,
+    LOAD_FOLLOWER
 } from './types'
 
 export const change_user_info = (user_info) => {
@@ -65,9 +66,9 @@ export const load_following = (following) => {
     }
 }
 
-// export const load_follwer = (follwer) => {
-//     return {
-//         type: LOAD_FOLLOWWER,
-//         follwer
-//     }
-// }
+export const load_follower = (follower) => {
+    return {
+        type: LOAD_FOLLOWER,
+        follower
+    }
+}

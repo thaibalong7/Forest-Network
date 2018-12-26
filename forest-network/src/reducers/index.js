@@ -5,6 +5,7 @@ import tweetsHomeReducer from './TweetsHomeReducer';
 import flagPageReducer from './flagReducer';
 import flagMeReducer from './flagMeReducer';
 import followingReducer from './followingReducer';
+import followerReducer from './followerReducer';
 
 export default combineReducers({
     userProfileReducer: userProfileReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     flagPageReducer: flagPageReducer,
     flagMeReducer: flagMeReducer,
     tweetsHomeReducer: tweetsHomeReducer,
-    followingReducer: followingReducer
+    followingReducer: followingReducer,
+    followerReducer: followerReducer
 });
