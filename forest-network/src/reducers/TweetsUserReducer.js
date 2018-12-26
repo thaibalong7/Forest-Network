@@ -12,8 +12,8 @@ const tweetsUserReducer = (prevState = initialState, action) => {
             return tweets_user;
         }
         case LOADMORE_TWEETS_USER: {
-            const { tweets_home } = action;
-            return [...prevState, ...tweets_home];
+            const { tweets_user } = action;
+            return [...prevState, ...tweets_user];
         }
         default:
             return prevState;
