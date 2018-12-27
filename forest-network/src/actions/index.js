@@ -12,7 +12,8 @@ import {
     CHANGE_NAME,
     ADD_NEW_TWEET_HOME,
     UPDATE_HISTORICAL_TRANSACTION,
-    LOADMORE_HISTORICAL_TRANSACTION
+    LOADMORE_HISTORICAL_TRANSACTION,
+    UPDATE_AVATAR_USER
 } from './types'
 
 export const change_user_info = (user_info) => {
@@ -109,5 +110,12 @@ export const loadmore_historical_transaction = (list_transaction) =>{
     return {
         type: LOADMORE_HISTORICAL_TRANSACTION,
         list_transaction
+    }
+}
+
+export const update_avatar_user = (avatar) =>{
+    return {
+        type: UPDATE_AVATAR_USER,
+        avatar
     }
 }
