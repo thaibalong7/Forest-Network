@@ -3,7 +3,7 @@ import '../../styles/Home.css';
 import '../../index.css';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
-import { change_flag_page, change_flag_me, increase_sequence } from "../../actions";
+import { change_flag_page, change_flag_me, increase_sequence, update_avatar_user } from "../../actions";
 import { sentUpdatePictureTransaction } from '../../lib/transaction/sendTransaction';
 class NavigationBar extends Component {
     onChangeFlagPage(event) {
@@ -32,31 +32,31 @@ class NavigationBar extends Component {
     onChangeFlagMe(event) {
         this.props.change_flag_me(event);
     }
-    changeImage(e) {
+    changeImage = (e) => {
         if (e.target.files.length !== 0) {
             const file = e.target.files[0];
-            const fileReader = new FileReader();
-            fileReader.readAsText(file);
-            fileReader.onloadend = () => {
-                console.log(Buffer.from(fileReader.result))
-                var buffer = new ArrayBuffer(fileReader.result.length);
-                console.log(fileReader.result.length)
-                Buffer.from(fileReader.result).map(function(value, i){buffer[i] = value});
-                console.log(buffer);
-                // sentUpdatePictureTransaction(Buffer.from(fileReader.result), this.props.userProfileReducer.sequence, (rs) => {
-                //     if (typeof rs === 'undefined') {
-                //         console.log('Fail to update avatar')
-                //     }
-                //     else {
-                //         if (rs.height === '0') {
-                //             console.log(rs.check_tx.log)
-                //         }
-                //         else {
-                //             console.log('Update avatar success')
-                //             this.props.increase_sequence();
-                //         }
-                //     }
-                // })
+            var reader = new FileReader();
+            reader.readAsArrayBuffer(file);
+            reader.onloadend = (evt) => {
+                if (evt.target.readyState == FileReader.DONE) {
+                    var arrayBuffer = evt.target.result,
+                        array = new Uint8Array(arrayBuffer);
+                    sentUpdatePictureTransaction(Buffer.from(array), this.props.userProfileReducer.sequence, (rs) => {
+                        if (typeof rs === 'undefined') {
+                            console.log('Fail to update avatar')
+                        }
+                        else {
+                            if (rs.height === '0') {
+                                console.log(rs.check_tx.log)
+                            }
+                            else {
+                                console.log('Update avatar success')
+                                this.props.update_avatar_user(array);
+                                this.props.increase_sequence();
+                            }
+                        }
+                    })
+                }
             }
         }
     }
@@ -123,8 +123,8 @@ class NavigationBar extends Component {
                                                     Change photo
 									            </button>
                                                 <div className="image-selector">
-                                                    <input type="hidden" name="media_file_name" className="file-name"/>
-									 	            <input type="hidden" name="media_data_empty" className="file-data"/>
+                                                    <input type="hidden" name="media_file_name" className="file-name" />
+                                                    <input type="hidden" name="media_data_empty" className="file-data" />
                                                     <input type="file" name="media[]" className="file-input"
                                                         tabIndex="-1" title="Add Photo" accept="image/gif,image/jpeg,image/jpg,image/png"
                                                         onChange={e => { this.changeImage(e) }}
@@ -133,11 +133,11 @@ class NavigationBar extends Component {
                                             </div>
                                         </li>
                                         <li id="photo-choose-webcam" className="u-hidden" role="presentation">
-								<button type="button" className="dropdown-link">Take photo</button>
-							</li>
-							<li id="photo-delete-image" className="u-hidden" role="presentation">
-							<button type="button" className="dropdown-link">Remove</button>
-								</li>
+                                            <button type="button" className="dropdown-link">Take photo</button>
+                                        </li>
+                                        <li id="photo-delete-image" className="u-hidden" role="presentation">
+                                            <button type="button" className="dropdown-link">Remove</button>
+                                        </li>
                                     </span>
                                 </div>
                             </div>
@@ -192,6 +192,9 @@ const mapDispatchToProps = (dispatch, props) => {
         increase_sequence: () => {
             dispatch(increase_sequence());
         },
+        update_avatar_user: (avatar) =>{
+            dispatch(update_avatar_user(avatar))
+        }
     }
 }
 
