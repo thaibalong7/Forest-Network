@@ -2,7 +2,6 @@ import { encode, sign } from './index';
 import { encodePost, encodeFollowings } from './v1';
 import axios from 'axios';
 import base32 from 'base32.js';
-import { API_server } from './../../config'
 const secret_key = sessionStorage.getItem('secret_key')
 export function sentCreateAccountTransaction(account, sequence, cb) {
     try {
