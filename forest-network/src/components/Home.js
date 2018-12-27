@@ -3,14 +3,16 @@ import '../styles/Home.css';
 import '../index.css';
 import '../styles/status.css';
 import { sentPostTransaction } from '../lib/transaction/sendTransaction'
-
+import Error from "../components/Error";
 
 class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
             renderTweets: [],
-            content_post: ''
+            content_post: '',
+            isOpenModal: false,
+            textNoti: ''
         }
         // Binds our scroll event handler
         window.onscroll = () => {
@@ -26,10 +28,18 @@ class Home extends Component {
         sentPostTransaction(this.state.content_post, this.props.userProfileReducer.sequence, rs => {
             if (typeof rs === 'undefined') {
                 console.log('Fail to post')
+                this.setState({
+                    textNoti: 'Fail to post',
+                    isOpenModal: true
+                })
             }
             else {
                 if (rs.height === '0') {
                     console.log(rs.check_tx.log)
+                    this.setState({
+                        textNoti: rs.check_tx.log,
+                        isOpenModal: true
+                    })
                 }
                 else {
                     console.log('Post success')
@@ -279,6 +289,9 @@ class Home extends Component {
     render() {
         return (
             <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
+                <Error	isOpenModal={this.state.isOpenModal}
+				closeModal={() =>{this.setState({isOpenModal: false})}}
+				text={this.state.textNoti}></Error>
                 {/* khung đăng bài */}
                 <div className="updateStatus">
                     <div >

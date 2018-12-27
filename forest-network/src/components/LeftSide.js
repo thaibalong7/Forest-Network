@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-
 import { connect } from 'react-redux';
 import { sentUpdateNameTransaction, sendPaymentTransaction, sentCreateAccountTransaction } from '../lib/transaction/sendTransaction';
 import { increase_sequence, change_name } from '../actions';
+import Error from "../components/Error";
 class LeftSide extends Component {
     constructor(props) {
         super(props)
@@ -13,7 +14,9 @@ class LeftSide extends Component {
             nameToChange: props.userProfileReducer.name,
             amountToSent: 0,
             accountToSent: '',
-            accountToCreate: ''
+            accountToCreate: '',
+            isOpenModal: false,
+            textNoti: ''
         }
     }
     componentDidUpdate(prevProps) {
@@ -28,14 +31,26 @@ class LeftSide extends Component {
         sentUpdateNameTransaction(this.state.nameToChange, this.props.userProfileReducer.sequence, (rs) => {
             if (typeof rs === 'undefined') {
                 console.log('Fail to update name')
+                this.setState({
+                    textNoti: 'Fail to update name',
+                    isOpenModal: true
+                })
             }
             else {
                 if (rs.height === '0') {
                     console.log(rs.check_tx.log)
+                    this.setState({
+                        textNoti: rs.check_tx.log,
+                        isOpenModal: true
+                    })
                 }
                 else {
                     this.props.change_name(this.state.nameToChange)
                     console.log('Update name success')
+                    // this.setState({
+                    //     textNoti: 'Update name success',
+                    //     isOpenModal: true
+                    // })
                     this.props.increase_sequence()
                 }
             }
@@ -46,10 +61,18 @@ class LeftSide extends Component {
         sendPaymentTransaction(this.state.accountToSent, this.state.amountToSent, this.props.userProfileReducer.sequence, rs => {
             if (typeof rs === 'undefined') {
                 console.log('Fail to sent')
+                this.setState({
+                    textNoti: 'Fail to sent',
+                    isOpenModal: true
+                })
             }
             else {
                 if (rs.height === '0') {
                     console.log(rs.check_tx.log)
+                    this.setState({
+                        textNoti: rs.check_tx.log,
+                        isOpenModal: true
+                    })
                 }
                 else {
                     console.log('Sent amount success')
@@ -57,6 +80,10 @@ class LeftSide extends Component {
                         amountToSent: 0,
                         accountToSent: ''
                     })
+                    // this.setState({
+                    //     textNoti: 'Sent amount success',
+                    //     isOpenModal: true
+                    // })
                     this.props.increase_sequence()
                 }
             }
@@ -66,16 +93,28 @@ class LeftSide extends Component {
         sentCreateAccountTransaction(this.state.accountToCreate, this.props.userProfileReducer.sequence, rs => {
             if (typeof rs === 'undefined') {
                 console.log('Fail to create')
+                this.setState({
+                    textNoti: 'Sent amount success',
+                    isOpenModal: true
+                })
             }
             else {
                 if (rs.height === '0') {
                     this.renderError(rs.check_tx.log)
+                    this.setState({
+                        textNoti: rs.check_tx.log,
+                        isOpenModal: true
+                    })
                 }
                 else {
                     console.log('Create new account success')
                     this.setState({
                         accountToCreate: ''
                     })
+                    // this.setState({
+                    //     textNoti: 'Create new account success',
+                    //     isOpenModal: true
+                    // })
                     this.props.increase_sequence()
                 }
             }
@@ -104,6 +143,9 @@ class LeftSide extends Component {
         var Bandwidth = "Bandwidth: " + this.props.userProfileReducer.bandwidth
         return (
             <div className="w-full lg:w-1/4 pl-4 lg:pl-0 pr-6 mt-8 mb-4">
+            <Error	isOpenModal={this.state.isOpenModal}
+				closeModal={() =>{this.setState({isOpenModal: false})}}
+				text={this.state.textNoti}></Error>
                 <div>
                     <h2><div
                         className="text-black font-bold no-underline hover:underline"
@@ -179,7 +221,7 @@ class LeftSide extends Component {
 
                     <div className="modal fade"
                         id="modalCreateAccount"
-                        data-backdrop="true"
+                        data-backdrop="static"
                         data-keyboard="true"
                         tabIndex="1"
                         aria-labelledby="myModalLabel"

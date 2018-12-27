@@ -5,7 +5,15 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
 import { change_flag_page, change_flag_me, increase_sequence, update_avatar_user } from "../../actions";
 import { sentUpdatePictureTransaction } from '../../lib/transaction/sendTransaction';
+import Error from "../../components/Error";
 class NavigationBar extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isOpenModal: false,
+            textNoti: ''
+        }
+    }
     onChangeFlagPage(event) {
         console.log(event);
         if (event === "me") {
@@ -44,10 +52,18 @@ class NavigationBar extends Component {
                     sentUpdatePictureTransaction(Buffer.from(array), this.props.userProfileReducer.sequence, (rs) => {
                         if (typeof rs === 'undefined') {
                             console.log('Fail to update avatar')
+                            this.setState({
+                                textNoti: 'Fail to update avatar',
+                                isOpenModal: true
+                            })
                         }
                         else {
                             if (rs.height === '0') {
                                 console.log(rs.check_tx.log)
+                                this.setState({
+                                    textNoti: rs.check_tx.log,
+                                    isOpenModal: true
+                                })
                             }
                             else {
                                 console.log('Update avatar success')
@@ -89,6 +105,9 @@ class NavigationBar extends Component {
 
         return (
             <div className="bg-white">
+             <Error	isOpenModal={this.state.isOpenModal}
+				closeModal={() =>{this.setState({isOpenModal: false})}}
+				text={this.state.textNoti}></Error>
                 <div className="container mx-auto flex flex-col lg:flex-row items-center py-2">
                     <nav className="w-full lg:w-2/5">
                         <Link to="/home" onClick={() => this.onChangeFlagPage("home")} className={homeStyles}><i className="fa fa-home fa-lg"></i>  Home</Link>

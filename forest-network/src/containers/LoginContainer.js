@@ -5,11 +5,19 @@ import { Keypair } from 'stellar-base';
 import { API_server } from '../config';
 import { change_user_info } from '../actions';
 import { connect } from 'react-redux';
+import Error from "../components/Error";
 
 async function saveSessionStorage(key, value) {
 	sessionStorage.setItem(key, value)
 }
 class LoginContainer extends Component {
+	constructor(props){
+		super(props)
+		this.state = {
+			isOpenModal: false,
+            textNoti: ''
+		}
+	}
 	login = (secret_key) => {
 		try {
 			const key = Keypair.fromSecret(secret_key);
@@ -36,18 +44,31 @@ class LoginContainer extends Component {
 				}
 			}).catch(e => {
 				console.log('This account is not exist');
+				this.setState({
+                    textNoti: 'This account is not exist',
+                    isOpenModal: true
+                })
 			})
 		}
 		catch (e) {
 			console.log('Secret key is invalid')
+			this.setState({
+				textNoti: 'Secret key is invalid',
+				isOpenModal: true
+			})
 		}
 	}
 	render() {
 		return (
-			<Login
-				flag="login"
-				login={this.login}>
-			</Login>
+			<div>
+				 <Error	isOpenModal={this.state.isOpenModal}
+				closeModal={() =>{this.setState({isOpenModal: false})}}
+				text={this.state.textNoti}></Error>
+				<Login
+					flag="login"
+					login={this.login}>
+				</Login>
+			</div>
 		);
 	}
 }
