@@ -15,6 +15,7 @@ export function sentCreateAccountTransaction(account, sequence, cb) {
             }
         }
         sign(trans, secret_key);
+        console.log(trans)
         const _tx = encode(trans).toString('hex')
         const _api_commit_tx = 'https://komodo.forest.network/broadcast_tx_commit?tx=0x' + _tx;
         axios.get(_api_commit_tx).then(rs => {
@@ -68,6 +69,7 @@ export function sentUpdateNameTransaction(name, sequence, cb) {
             }
         }
         sign(trans, secret_key);
+        console.log(trans)
         const _tx = encode(trans).toString('hex')
         const _api_commit_tx = 'https://komodo.forest.network/broadcast_tx_commit?tx=0x' + _tx;
         axios.get(_api_commit_tx).then(rs => {
@@ -101,6 +103,7 @@ export function sentUpdatePictureTransaction(data, sequence, cb) {
             }
         }
         sign(trans, secret_key);
+        console.log(trans)
         const _tx = encode(trans).toString('base64')
         axios.post('https://dragonfly.forest.network/', {
             "method": "broadcast_tx_commit",
@@ -117,6 +120,7 @@ export function sentUpdatePictureTransaction(data, sequence, cb) {
             }
         })
     } catch (e) {
+        console.log(e);
         cb({
             check_tx: { log: 'Error: Cannot create transaction', },
             height: '0'
@@ -140,6 +144,7 @@ export function sentUpdateFollowingsTransaction(addresses, sequence, cb) {
             }
         }
         sign(trans, secret_key);
+        console.log(trans)
         const _tx = encode(trans).toString('hex')
         const _api_commit_tx = 'https://komodo.forest.network/broadcast_tx_commit?tx=0x' + _tx;
         axios.get(_api_commit_tx).then(rs => {
@@ -176,6 +181,7 @@ export function sentPostTransaction(text, sequence, cb) {
             }
         }
         sign(trans, secret_key);
+        console.log(trans)
         const _tx = encode(trans).toString('hex')
         const _api_commit_tx = 'https://komodo.forest.network/broadcast_tx_commit?tx=0x' + _tx;
         axios.get(_api_commit_tx).then(rs => {
@@ -208,6 +214,7 @@ export function sendPaymentTransaction(accountToSent, amount, sequence, cb) {
             }
         }
         sign(trans, secret_key);
+        console.log(trans)
         const _tx = encode(trans).toString('hex')
         const _api_commit_tx = 'https://komodo.forest.network/broadcast_tx_commit?tx=0x' + _tx;
         axios.get(_api_commit_tx).then(rs => {
