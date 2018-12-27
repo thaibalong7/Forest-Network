@@ -120,7 +120,6 @@ export function sentUpdatePictureTransaction(data, sequence, cb) {
             }
         })
     } catch (e) {
-        console.log(e);
         cb({
             check_tx: { log: 'Error: Cannot create transaction', },
             height: '0'
